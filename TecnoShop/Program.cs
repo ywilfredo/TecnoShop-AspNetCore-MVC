@@ -38,4 +38,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//antes de lanzar la aplicacion va ejecutar este metodo
+DbInitializer.Seed(app);
 app.Run();

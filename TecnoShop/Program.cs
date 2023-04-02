@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using TecnoShop.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+//Agregar como servicio al dbcontext
+builder.Services.AddDbContext<TecnoShopDbContext>(options => {
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:Conexion"]);
+});
 
 var app = builder.Build();
 

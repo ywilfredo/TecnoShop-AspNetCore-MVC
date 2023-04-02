@@ -1,31 +1,36 @@
 ﻿@model ListaProductoViewModel;
 
 
-<section class="container seccion-productos">
-    <div class="row">
+<div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row seccion-productos">
         @foreach (var producto in Model.Productos)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <!-- Start Single Product -->
-                <div class="single-product">
-                    <div class="product-image">
-                        <img src="@producto.ImagenUrl" alt="@producto.Nombre">
-                        <div class="button">
-                            <a href="#" class="btn"><i class="bi bi-cart-plus"></i> Agregar al Carritot</a>
+            <div class="col-md-4 col-sm-6  col-lg-3 mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-img-actions">
+                            <img src="@producto.ImagenUrl" class="card-img img-fluid" alt="@producto.Nombre">
                         </div>
                     </div>
-                    <div class="product-info">
-                        <span class="category">@producto.Categoria.Nombre</span>
-                        <h4 class="title">
-                            <a class="title-link" href="#">@producto.Nombre</a>
-                        </h4>
-                        <div class="price">
-                            <span>$@producto.Precio</span>
+                    <div class="card-body bg-light text-center">
+                        <div class="mb-2">
+                            <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true">@producto.Nombre</a></h6>
+                            <a href="#" class="text-muted" data-abc="true">@producto.Categoria.Nombre</a>
                         </div>
+                        <h3 class="mb-0 font-weight-semibold">$@producto.Precio</h3>
+                        <div class="estrellas">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <div class="text-muted mb-3">34 reviews</div>
+                        <button type="button" class="btn bg-cart"><i class="bi bi-eye"></i> Especificaciones</button>
                     </div>
                 </div>
-                <!-- End Single Product -->
             </div>
+
         }
     </div>
-</section>
+</div>

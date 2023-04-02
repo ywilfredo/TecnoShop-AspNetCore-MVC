@@ -22,7 +22,7 @@ namespace TecnoShop.Controllers
         }
 
         // 
-        public IActionResult ListarProductos()
+        public IActionResult ListaProducto()
         {
 
             ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");

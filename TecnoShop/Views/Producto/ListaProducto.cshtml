@@ -1,0 +1,31 @@
+﻿@model ListaProductoViewModel;
+
+
+<section class="container seccion-productos">
+    <div class="row">
+        @foreach (var producto in Model.Productos)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <!-- Start Single Product -->
+                <div class="single-product">
+                    <div class="product-image">
+                        <img src="@producto.ImagenUrl" alt="@producto.Nombre">
+                        <div class="button">
+                            <a href="#" class="btn"><i class="bi bi-cart-plus"></i> Agregar al Carritot</a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">@producto.Categoria.Nombre</span>
+                        <h4 class="title">
+                            <a class="title-link" href="#">@producto.Nombre</a>
+                        </h4>
+                        <div class="price">
+                            <span>$@producto.Precio</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Product -->
+            </div>
+        }
+    </div>
+</section>

@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Agregar servicio
+builder.Services.AddScoped<IMarcaRepositorio, MarcaRepositorio>();
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+
 
 //Agregar como servicio al dbcontext
 builder.Services.AddDbContext<TecnoShopDbContext>(options => {

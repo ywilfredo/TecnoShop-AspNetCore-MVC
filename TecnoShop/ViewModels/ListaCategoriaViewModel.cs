@@ -10,5 +10,6 @@ namespace TecnoShop.ViewModels
         {
             Categorias = categorias;
         }
+
     }
 }

@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     
+    <link rel="icon" type="image/x-icon" href="~/icono.png">
     <link rel="stylesheet" href="~/css/listaproducto.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/about.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TecnoShop.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TecnoShop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -35,6 +36,33 @@
                     </ul>
                 </div>
             </div>
+        </nav>*@
+
+        <nav class="navbar navbar-expand-md navbar-light fixed-top">
+            <div class="container">
+                <!-- Boton menu-burger -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbar-toggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar-toggler">
+
+                    <a class="navbar-brand text-primary" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-laptop"></i></a>
+
+                    <!-- cuadro de menu desplegable -->
+                    <ul class="navbar-nav d-flex justify-content-center align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white item" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white item" asp-area="" asp-controller="About" asp-action="About">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white item" asp-area="" asp-controller="Producto" asp-action="ListaProducto">Productos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
 
     </header>
@@ -44,11 +72,46 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - TecnoShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+    </footer>*@
+
+    <!-- footer -->
+    <footer class="footer-07">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <h2 class="footer-heading"><a href="#" class="logo">TecnoShop.com</a></h2>
+                    <p class="menu">
+                        <a href="#">Inicio</a>
+                        <a href="#">Servicios</a>
+                        <a href="#">Sobre nosotros</a>
+                        <a href="#">Productos</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Contacto</a>
+                    </p>
+                    <ul class="ftco-footer-social ulfooter p-0">
+                        <li class="ftco-animate lifooter"><a  href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="enlace"><i class="bi bi-whatsapp"></i></a></li>
+                        <li class="ftco-animate lifooter"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook" class="enlace"><i class="bi bi-facebook"></i></a></li>
+                        <li class="ftco-animate lifooter"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram" class="enlace"><i class="bi bi-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <p class="copyright">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | pagina <i class="ion-ios-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="brand-footer">TecnoShop.com</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

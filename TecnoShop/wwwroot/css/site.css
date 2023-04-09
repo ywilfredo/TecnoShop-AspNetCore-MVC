@@ -22,4 +22,198 @@ body {
   margin-bottom: 60px;
 }
 
+/* Personalizar _Layout*/
+.navbar {
+    background-color: #121725;
+}
+
+.navbar-collapse {
+    font-size: 18px;
+    color: white;
+}
+
+.navbar-toggler i {
+    color: white;
+    font-size: 30px;
+}
+/*Logo de la empresa*/
+.navbar-brand i {
+    font-size: 35px;
+}
+
+/*Responsivo ------------------------------------------*/
+@media screen and (max-width: 767px) {
+    /*Luego la clase que tiene el elemento que va afectar*/
+    .navbar-brand {
+        display: none;
+    }
+
+    .carousel-caption h1 {
+        font-size: 40px;
+    }
+
+    .carousel-caption p {
+        font-size: 20px;
+    }
+}
+
+
+.c-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    background-size: cover;
+}
+
+.img-item {
+    height: 50vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    background-size: cover;
+}
+
+.c-img {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.img-about {
+    background-color: #0b0d0e;
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+    /*filter: brightness(0.6);*/
+}
+
+/* home*/
+.banner {
+    text-align: center;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: aquamarine;
+    height: 300px;
+}
+
+.row {
+    height: auto;
+}
+
+.principal {
+    height: 300px;
+}
+
+.carousel-caption p {
+    margin-top: 120px;
+}
+.carousel-inner{
+    margin-top: 75px;
+}
+/*Footer -------------------------*/
+/*.footer {
+    background-color: #121725;
+
+}*/
+footer {
+    padding: 7em 0;
+}
+
+.footer-07 {
+    background: #121212;
+}
+
+    .footer-07 a {
+        color: #a3de83;
+    }
+
+    .footer-07 p {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .footer-07 .footer-heading {
+        font-size: 30px;
+        color: #fff;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+        .footer-07 .footer-heading .logo {
+            color: #fff;
+        }
+
+    .footer-07 .menu {
+        margin-bottom: 30px;
+    }
+
+        .footer-07 .menu a {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+    /*.footer-07 .ftco-footer-social li a {
+        background: transparent;
+        border: 1px solid #a3de83;
+
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        position: relative;
+    }*/
+
+.enlace {
+    background: transparent;
+   /* border: 1px solid #a3de83;*/
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: relative;
+}
+/**/
+.ulfooter {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.lifooter {
+    list-style: none;
+    margin: 0 10px 0 0;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+}
+
+
+.ftco-footer-social li a i {
+    font-size: 25px;
+    color: #0D6EFD;
+}
+.brand-footer {
+    color: #0D6EFD;
+}
+
+.mycontact {
+    margin-top: 200px;
+    margin-left: 100px;
+}
+
+
+.msg-created {
+    margin-top: 100px;
+}
+
+.seccion-newcategory {
+    margin-top: 100px;
+}
+
+.seccion {
+    margin-top: 100px;
+}
 

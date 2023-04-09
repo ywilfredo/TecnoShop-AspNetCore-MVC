@@ -2,7 +2,69 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="carousel slide" id="hero-carousel" data-bs-ride="carousel">
+    <!--Indicadores-->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!--Imagenes-->
+    <div class="carousel-inner">
+        <div class="carousel-item active c-item">
+            <img src="~/assets/images/lap-1.jpg" class="d-block w-100 c-img" alt="laptop-1">
+
+            <!--Texto sobre la imagen.  con top-o subir texto-->
+            <div class="carousel-caption top-0 mt-4 d-sm d-md-block">
+                <p class="fs-3">Tienda Online</p>
+                <h1 class="display-1 fw-bolder text-capitalize">Equipos de Escritorio</h1>
+            </div>
+        </div>
+        <div class="carousel-item c-item">
+            <img src="~/assets/images/lap-2.jpg" class="d-block w-100 c-img" alt="laptop-2">
+
+            <div class="carousel-caption top-0 mt-4 d-sm d-md-block">
+                <p class="fs-3">Tienda Online</p>
+                <h1 class="display-1 fw-bolder text-capitalize">Laptops de todo tipo</h1>
+            </div>
+
+        </div>
+        <div class="carousel-item c-item">
+            <img src="~/assets/images/lap-3.jpg" class="d-block w-100 c-img" alt="laptop-3">
+            <div class="carousel-caption top-0 mt-4 d-sm d-md-block">
+                <p class="fs-3">Tienda Online</p>
+                <h1 class="display-1 fw-bolder text-capitalize">Servicio Tecnico</h1>
+            </div>
+        </div>
+    </div>
+
+    <!--Botones controladores-->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</section>
+<div class="container-fluid mt-4">
+    <div class="row principal">
+        <div class="col bg-primary"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <div class="row principal">
+        <div class="col bg-light"></div>
+        <div class="col "></div>
+        <div class="col "></div>
+    </div>
+    <div class="row principal">
+        <div class="col bg-primary"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
 </div>
+<!--particulas de js-->
+<script src="~js/particles.js"></script>

@@ -28,5 +28,13 @@ namespace TecnoShop.Controllers
             ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
             return View(listaProductoViewModel);
         }
+
+        public IActionResult Especificacion(int id) // el id tiene que se er mismo que en la vista. 
+        {
+            var producto = _productoRepositorio.ObtenerProductoPorId(id);
+            if (producto == null)
+                return NotFound();
+            return View(producto);
+        }
     }
 }

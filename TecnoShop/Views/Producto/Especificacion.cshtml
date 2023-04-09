@@ -1,0 +1,20 @@
+﻿@model Producto
+<section class="container seccion">
+    <h3 class="my-5">
+        @Model.Nombre
+    </h3>
+    <div class="row gx-5">
+        <img alt="@Model-Name" src="@Model.ImagenUrl" class="img-fluid col-5" />
+        <div class="col-7">
+            <h4>@Model.Nombre</h4>
+            <p>@Model.Especificaciones</p>
+            <h3 class="pull-right">@Model.Precio.ToString()</h3>
+            <div class="addToCart">
+                <p class="button">
+                    <a class="btn btn-secondary" asp-controller="ShoppingCart" asp-action="AddShoppingCart" asp-route-pieId="@Model.ProductoId"> Add to Cart</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>

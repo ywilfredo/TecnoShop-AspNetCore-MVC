@@ -2,7 +2,7 @@
 
 namespace TecnoShop.Controllers
 {
-    public class ConctactController : Controller
+    public class ContactController : Controller
     {
         public IActionResult Index()
         {

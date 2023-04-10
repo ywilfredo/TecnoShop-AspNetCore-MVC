@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TecnoShop.Models;
+using TecnoShop.ViewModels;
 
 namespace TecnoShop.Controllers
 {
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;

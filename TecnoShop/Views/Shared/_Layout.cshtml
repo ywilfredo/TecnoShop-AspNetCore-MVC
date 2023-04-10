@@ -15,30 +15,6 @@
 </head>
 <body>
     <header>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TecnoShop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="About">Sobre Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="ListaProducto">Productos</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
-
         <nav class="navbar navbar-expand-md navbar-light fixed-top">
             <div class="container">
                 <!-- Boton menu-burger -->
@@ -58,6 +34,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white item" asp-area="" asp-controller="About" asp-action="About">Nosotros</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white item" asp-area="" asp-controller="Contact" asp-action="Contact">Contacto</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link text-white item" asp-area="" asp-controller="Marca" asp-action="ListaMarca">Marcas</a>
@@ -69,9 +48,6 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-white item" asp-area="" asp-controller="Producto" asp-action="ListaProducto">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white item" asp-area="" asp-controller="Contact" asp-action="Contact">Contáctanos</a>
                         </li>
 
                     </ul>
@@ -86,12 +62,6 @@
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - TecnoShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
-
     <!-- footer -->
     <footer class="footer-07">
         <div class="container">
@@ -99,12 +69,12 @@
                 <div class="col-md-12 text-center">
                     <h2 class="footer-heading"><a href="#" class="logo">TecnoShop.com</a></h2>
                     <p class="menu">
-                        <a href="#">Inicio</a>
+                        <a asp-controller="Home" asp-action="Index">Inicio</a>
                         <a href="#">Servicios</a>
-                        <a href="#">Sobre nosotros</a>
-                        <a href="#">Productos</a>
+                        <a asp-controller="About" asp-action="About">Nosotros</a>
+                        <a asp-controller="Producto" asp-action="ListaProducto">Productos</a>
                         <a href="#">Blog</a>
-                        <a href="#">Contacto</a>
+                        <a asp-controller="Contact" asp-action="Contact">Contáctanos</a>
                     </p>
                     <ul class="ftco-footer-social ulfooter p-0">
                         <li class="ftco-animate lifooter"><a  href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="enlace"><i class="bi bi-whatsapp"></i></a></li>
@@ -117,7 +87,7 @@
                 <div class="col-md-12 text-center">
                     <p class="copyright">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | pagina <i class="ion-ios-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="brand-footer">TecnoShop.com</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | coded <i class="ion-ios-heart" aria-hidden="true"></i> by <a href="https://github.com/ywilfredo" target="_blank" class="brand-footer">ywilfredo</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

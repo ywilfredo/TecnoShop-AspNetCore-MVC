@@ -12,12 +12,9 @@ namespace TecnoShop.Controllers
         {
             _marcaRepositorio = marcaRepositorio;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult ListaMarca()
+
+        public IActionResult Index()
         {
 
             ListaMarcaViewModel listaMarcaViewModel = new ListaMarcaViewModel(_marcaRepositorio.TodasLasMarcas);

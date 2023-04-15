@@ -2,12 +2,12 @@
 {
     public interface ICategoriaRepositorio
     {
-        IEnumerable<Categoria> TodasLasCategorias { get; }
-
+        IEnumerable<Categoria> TodasLasCategorias();
+        Categoria? ObtenerCategoria(int categoriaId);
 
         void CrearCategoria(Categoria categoria);
 
-        //void ActualizarCategoria(Categoria categoria);
+        void EditarCategoria(Categoria categoria);
 
         //void EliminarCategoria(Categoria categoria);
     }

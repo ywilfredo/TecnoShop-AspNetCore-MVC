@@ -1,15 +1,16 @@
 ﻿@model TecnoShop.Models.Categoria
 @{
-    ViewData["Title"] = "CrearCategoria";
+    ViewData["Title"] = "EditarCategoria";
 }
 
 <section class="container seccion">
-    <h1>Crear Categoria</h1>
+    <h1>Editar Categoria</h1>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="CrearCategoria">
+            <form asp-action="EditarCategoria">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CategoriaId"/>
                 <div class="form-group">
                     <label asp-for="Nombre" class="control-label"></label>
                     <input asp-for="Nombre" class="form-control" />
@@ -21,7 +22,7 @@
                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Crear Categoria" class="btn btn-primary"/>
+                    <input type="submit" value="Actualizar Categoria" class="btn btn-primary" />
                 </div>
             </form>
 
@@ -39,9 +40,10 @@
     }
 }
 
+
 @*@model Categoria
 <section class="container seccion">
-    <form asp-action="CrearCategoria" method="post" role="form">
+    <form asp-action="EditarCategoria" method="post" role="form">
         <h3 class="my-5">
             Agregar nueva categoría para sus productos.
         </h3>
@@ -50,6 +52,7 @@
 
         <div class="col-6">
             <div class="row g-2">
+                <input type="hidden" asp-for="CategoriaId" />
                 <div class="col-12">
                     <label asp-for="Nombre" class="form-label"></label>
                     <input asp-for="Nombre" class="form-control" />
@@ -65,7 +68,7 @@
 
                 <div class="mt-2">
                     <div class="col-md-offset-2 col-md-5">
-                        <input type="submit" class="btn btn-secondary" value="Crear Categoria"/>
+                        <input type="submit" class="btn btn-secondary" value="Actualizar Categoria"/>
                     </div>
                 </div>
             </div>

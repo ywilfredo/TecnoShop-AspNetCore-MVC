@@ -39,11 +39,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-white item" asp-area="" asp-controller="Marca" asp-action="ListaMarca">Marcas</a>
+                            <a class="nav-link text-white item" asp-area="" asp-controller="Marca" asp-action="Index">Marcas</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-white item" asp-area="" asp-controller="Categoria" asp-action="ListaCategoria">Categorias</a>
+                            <a class="nav-link text-white item" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
                         </li>
 
                         <li class="nav-item">
@@ -58,6 +58,21 @@
     </header>
     <div class="container-fluid px-0">
         <main role="main" class="pb-3">
+            @*@if (TempData["sucessMessage"]!= null)
+            {
+                <div class="alert alert-sucess mensaje">
+                    <b>Sucess : </b> @TempData["sucessMessage"]
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" ></button>
+                </div>
+            }
+            @if (TempData["errorMessage"] != null)
+            {
+                <div class="alert alert-danger mensaje">
+                    <b>Error : </b> @TempData["errorMessage"]
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+                </div>
+            }*@
+
             @RenderBody()
         </main>
     </div>
@@ -98,6 +113,9 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!--para tener mensajes de alerta elegantes-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

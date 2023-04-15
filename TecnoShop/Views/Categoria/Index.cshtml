@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<TecnoShop.Models.Categoria>
+
 @{
+    ViewData["Title"] = "Index";
 }
+<section class="container seccion">
+<h1>Index</h1>
+<p>
+    <a asp-action="CrearCategoria"> Crear Categoria</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId">Editar</a> |
+                    <a asp-action="Detalle" asp-route-id="@item.CategoriaId">Detalle</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.CategoriaId">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+</section>

@@ -8,7 +8,7 @@ namespace TecnoShop.Models
     {
         public int CategoriaId { get; set; }
         [Required(ErrorMessage = "Por favor ingrese el nombre de la categoría")]
-        [Display(Name = "Nombre de la categoría")]
+        [Display(Name = "Nombre")]
         [StringLength(50)]
 
         public string Nombre { get; set; } = string.Empty;

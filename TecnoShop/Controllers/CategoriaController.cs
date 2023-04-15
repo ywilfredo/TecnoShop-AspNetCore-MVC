@@ -71,11 +71,21 @@ namespace TecnoShop.Controllers
             }
             return View(categoria);
         }
-        //public IActionResult CategoriaActualizada()
-        //{
-        //    ViewBag.MensajeCategoriaCreada = "¡Categoria actualizada correcatamente!";
-        //    return View();
-        //}
+
+
+        public IActionResult EliminarCategoria(int id)
+        {
+            Categoria? categoria = _categoriaRepositorio.ObtenerCategoria(id);
+            return View(categoria);
+        }
+
+        [HttpPost]
+        public IActionResult EliminarCategoria(Categoria categoria)
+        {
+           
+             _categoriaRepositorio.EliminarCategoria(categoria);
+             return RedirectToAction("Index");
+        }
 
     }
 }

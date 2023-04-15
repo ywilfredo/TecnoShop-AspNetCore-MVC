@@ -39,16 +39,11 @@ namespace TecnoShop.Models
             _tecnoShopDbContext.SaveChanges();
         }
 
-       
-
-
-
-
-        //public void EliminarCategoria(Categoria categoria)
-        //{
-        //    _tecnoShopDbContext.Categorias.Remove(categoria);
-        //    _tecnoShopDbContext.SaveChanges();
-        //}
+        public void EliminarCategoria(Categoria categoria)
+        {
+            _tecnoShopDbContext.Categorias.Remove(categoria);
+            _tecnoShopDbContext.SaveChanges();
+        }
 
     }
 }

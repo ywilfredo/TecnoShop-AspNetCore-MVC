@@ -9,6 +9,6 @@
 
         void EditarCategoria(Categoria categoria);
 
-        //void EliminarCategoria(Categoria categoria);
+        void EliminarCategoria(Categoria categoria);
     }
 }

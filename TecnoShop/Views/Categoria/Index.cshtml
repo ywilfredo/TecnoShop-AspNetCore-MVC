@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <section class="container seccion">
-<h1>Index</h1>
+<h1>Listado de Categorías</h1>
 <p>
     <a asp-action="CrearCategoria"> Crear Categoria</a>
 </p>
@@ -32,7 +32,7 @@
                 </td>
                 <td>
                     <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId">Editar</a> |
-                    <a asp-action="Detalle" asp-route-id="@item.CategoriaId">Detalle</a> |
+                    <a asp-action="DetalleCategoria" asp-route-id="@item.CategoriaId">Detalle</a> |
                     <a asp-action="EliminarCategoria" asp-route-id="@item.CategoriaId">Eliminar</a>
                 </td>
             </tr>

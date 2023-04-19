@@ -21,6 +21,7 @@ namespace TecnoShop.Models
             }
         }
 
+
         public IEnumerable<Producto> ProductoDestacado
         {
             get

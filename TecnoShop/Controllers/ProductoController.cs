@@ -16,16 +16,17 @@ namespace TecnoShop.Controllers
             _categoriaRepositorio = categoriaRepositorio;
             _marcaRepositorio = marcaRepositorio;
         }
+
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Producto> productos = _productoRepositorio.TodosLosProductos.ToList();
+            return View(productos);
         }
 
-        // 
         public IActionResult ListaProducto()
         {
 
-            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
+            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos,"Gaming");
             return View(listaProductoViewModel);
         }
 

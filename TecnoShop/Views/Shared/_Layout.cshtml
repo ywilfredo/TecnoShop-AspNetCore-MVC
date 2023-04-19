@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-white item" asp-area="" asp-controller="Producto" asp-action="ListaProducto">Productos</a>
+                            <a class="nav-link text-white item" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
                         </li>
 
                     </ul>
@@ -58,21 +58,6 @@
     </header>
     <div class="container-fluid px-0">
         <main role="main" class="pb-3">
-            @*@if (TempData["sucessMessage"]!= null)
-            {
-                <div class="alert alert-sucess mensaje">
-                    <b>Sucess : </b> @TempData["sucessMessage"]
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" ></button>
-                </div>
-            }
-            @if (TempData["errorMessage"] != null)
-            {
-                <div class="alert alert-danger mensaje">
-                    <b>Error : </b> @TempData["errorMessage"]
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
-                </div>
-            }*@
-
             @RenderBody()
         </main>
     </div>

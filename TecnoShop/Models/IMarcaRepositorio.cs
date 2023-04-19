@@ -2,12 +2,13 @@
 {
     public interface IMarcaRepositorio
     {
-        IEnumerable<Marca> TodasLasMarcas { get; }
+        IEnumerable<Marca> TodasLasMarcas();
+        Marca? ObtenerMarca(int marcaId);
 
         void CrearMarca(Marca marca);
 
-        //void ActualizarMarca(Marca marca);
+        void EditarMarca(Marca marca);
 
-        //void EliminarMarca(Marca marca);
+        void EliminarMarca(Marca marca);
     }
 }

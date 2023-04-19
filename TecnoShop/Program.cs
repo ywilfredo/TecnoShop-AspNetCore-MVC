@@ -17,6 +17,13 @@ builder.Services.AddDbContext<TecnoShopDbContext>(options => {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:Conexion"]);
 });
 
+
+//Agregar servicio de RazorRuntimeCompilation
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -7,7 +7,17 @@
         {
             _tecnoShopDbContext = tecnoShopDbContext;
         }
-        public IEnumerable<Marca> TodasLasMarcas => _tecnoShopDbContext.Marcas.OrderBy(x => x.Nombre);
+        //public IEnumerable<Marca> TodasLasMarcas => _tecnoShopDbContext.Marcas.OrderBy(x => x.Nombre);
+        public IEnumerable<Marca> TodasLasMarcas()
+        {
+            List<Marca> marcas = _tecnoShopDbContext.Marcas.ToList();
+            return marcas;
+        }
+        public Marca? ObtenerMarca(int marcaId)
+        {
+            Marca? marca = _tecnoShopDbContext.Marcas.Where(m => m.MarcaId == marcaId).FirstOrDefault();
+            return marca;
+        }
 
         public void CrearMarca(Marca marca)
         {
@@ -16,5 +26,19 @@
             _tecnoShopDbContext.SaveChanges();
 
         }
+
+        public void EditarMarca(Marca marca)
+        {
+            _tecnoShopDbContext.Marcas.Update(marca);
+            _tecnoShopDbContext.SaveChanges();
+        }
+
+        public void EliminarMarca(Marca marca)
+        {
+            _tecnoShopDbContext.Marcas.Remove(marca);
+            _tecnoShopDbContext.SaveChanges();
+        }
+
+        
     }
 }

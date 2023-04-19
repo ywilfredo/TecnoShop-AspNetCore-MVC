@@ -23,6 +23,11 @@ namespace TecnoShop.Controllers
 
         }
 
+        public IActionResult Index2()
+        {
+            return View();
+        }
+
         public IActionResult CrearCategoria()
         {
             return View();
@@ -35,7 +40,8 @@ namespace TecnoShop.Controllers
             if (ModelState.IsValid)
             {
                 _categoriaRepositorio.CrearCategoria(categoria);
-                return RedirectToAction("CategoriaCreada");
+                TempData["mensaje"] = "La categoria se creó correctamente";
+                return RedirectToAction("Index");
             }
             return View(categoria);
         }
@@ -67,6 +73,7 @@ namespace TecnoShop.Controllers
             if (ModelState.IsValid)
             {
                 _categoriaRepositorio.EditarCategoria(categoria);
+                TempData["mensaje"] = "La categoria se actualizó correctamente";
                 return RedirectToAction(nameof(Index));
             }
             return View(categoria);
@@ -84,7 +91,8 @@ namespace TecnoShop.Controllers
         {
            
              _categoriaRepositorio.EliminarCategoria(categoria);
-             return RedirectToAction("Index");
+            TempData["mensaje"] = "La categoria se eliminó correctamente";
+            return RedirectToAction("Index");
         }
 
     }

@@ -2,12 +2,26 @@
 
 @{
     ViewData["Title"] = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section class="container seccion">
 <h1>Listado de Categorías</h1>
+
+    @if(TempData["mensaje"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
 <p>
     <a asp-action="CrearCategoria"> Crear Categoria</a>
 </p>
+@*<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#myModal" data-url="@Url.Action("CrearCategoria")"> Crear Categoria</button>
+*@
 <table class="table">
     <thead>
         <tr>
@@ -31,9 +45,9 @@
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
-                    <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId">Editar</a> |
-                    <a asp-action="DetalleCategoria" asp-route-id="@item.CategoriaId">Detalle</a> |
-                    <a asp-action="EliminarCategoria" asp-route-id="@item.CategoriaId">Eliminar</a>
+                    <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId"> Editar </a> |
+                    <a asp-action="DetalleCategoria" asp-route-id="@item.CategoriaId"> Detalle </a> |
+                    <a asp-action="EliminarCategoria" asp-route-id="@item.CategoriaId"> Eliminar </a>
                 </td>
             </tr>
         }
@@ -41,3 +55,22 @@
 
 </table>
 </section>
+
+@*<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h2 class="modal-title text-primary text-center"> Agregar Categoria</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>*@

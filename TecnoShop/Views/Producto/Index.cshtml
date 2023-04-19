@@ -1,6 +1,75 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<TecnoShop.Models.Producto>
+
 @{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Listado de productos</h2>
+<section class="container seccion">
+    <h1>Listado de Productos</h1>
+
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @*<p>
+        <a asp-action="CrearProducto"> Crear Producto</a>
+    </p>*@
+    @*<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#myModal" data-url="@Url.Action("CrearCategoria")"> Crear Categoria</button>
+    *@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Especificaciones)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Marca)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Especificaciones)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Marca.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    @*<td>
+                        <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId"> Editar </a> |
+                        <a asp-action="DetalleCategoria" asp-route-id="@item.CategoriaId"> Detalle </a> |
+                        <a asp-action="EliminarCategoria" asp-route-id="@item.CategoriaId"> Eliminar </a>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</section>

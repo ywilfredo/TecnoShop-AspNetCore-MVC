@@ -9,15 +9,19 @@ namespace TecnoShop.Controllers
     {
         
         private readonly ILogger<HomeController> _logger;
-        
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductoRepositorio _productoRepositorio;
+
+        //instanciar Interfaz de producto y agregar en el constructor de HomeController
+        public HomeController(ILogger<HomeController> logger, IProductoRepositorio productoRepositorio)
         {
             _logger = logger;
+            _productoRepositorio = productoRepositorio;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
+            return View(listaProductoViewModel);
         }
 
         public IActionResult Privacy()

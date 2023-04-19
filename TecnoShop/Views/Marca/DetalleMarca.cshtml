@@ -1,0 +1,32 @@
+﻿@model TecnoShop.Models.Marca
+
+@{
+    ViewData["Title"] = "Detalle";
+}
+
+<section class="container seccion">
+    <h1>Detalle</h1>
+
+    <div>
+        <h4>Marca</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="EditarMarca" asp-route-id="@Model?.MarcaId">Editar</a> |
+        <a asp-action="Index">Volver atrás</a>
+    </div>
+</section>

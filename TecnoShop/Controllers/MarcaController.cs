@@ -17,8 +17,8 @@ namespace TecnoShop.Controllers
         public IActionResult Index()
         {
 
-            ListaMarcaViewModel listaMarcaViewModel = new ListaMarcaViewModel(_marcaRepositorio.TodasLasMarcas);
-            return View(listaMarcaViewModel);
+            IEnumerable<Marca> marcas = _marcaRepositorio.TodasLasMarcas();
+            return View(marcas);
         }
 
         public IActionResult CrearMarca()
@@ -33,16 +33,52 @@ namespace TecnoShop.Controllers
             if (ModelState.IsValid)
             {
                 _marcaRepositorio.CrearMarca(marca);
-                return RedirectToAction("MarcaCreada");
+                TempData["mensaje"] = "La marca se creó correctamente";
+                return RedirectToAction("Index");
             }
 
             return View(marca);
 
         }
-        public IActionResult MarcaCreada()
+
+        public IActionResult DetalleMarca(int id)
         {
-            ViewBag.MensajeMarcaCreada = "¡Gracias por agregar una nueva marca para sus productos!";
-            return View();
+            Marca? marca = _marcaRepositorio.ObtenerMarca(id);
+            return View(marca);
+        }
+
+        public IActionResult EditarMarca(int id)
+        {
+            Marca? marca = _marcaRepositorio.ObtenerMarca(id);
+            return View(marca);
+        }
+
+        [HttpPost]
+        public IActionResult EditarMarca(Marca marca)
+        {
+            if (ModelState.IsValid)
+            {
+                _marcaRepositorio.EditarMarca(marca);
+                TempData["mensaje"] = "La marca se actualizó correctamente";
+                return RedirectToAction(nameof(Index));
+            }
+            return View(marca);
+        }
+
+
+        public IActionResult EliminarMarca(int id)
+        {
+            Marca? marca = _marcaRepositorio.ObtenerMarca(id);
+            return View(marca);
+        }
+
+        [HttpPost]
+        public IActionResult EliminarMarca(Marca marca)
+        {
+
+            _marcaRepositorio.EliminarMarca(marca);
+            TempData["mensaje"] = "La marca se eliminó correctamente";
+            return RedirectToAction("Index");
         }
     }
 }

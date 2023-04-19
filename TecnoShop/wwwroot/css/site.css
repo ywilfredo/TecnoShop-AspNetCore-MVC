@@ -220,4 +220,27 @@ footer {
 .seccion {
     margin-top: 100px;
 }
+/*Index Productos*/
+.miniatura {
+    /*vertical-align: middle;*/
+    height: 50px;
+    width: 50px;
+}
 
+.tabla-productos {
+    font-size: 14px;
+}
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width:300px;
+    margin: auto;
+}
+
+    .ellipsis:hover {
+        text-overflow: initial;
+        white-space: initial;
+        overflow: visible;
+        cursor: pointer;
+    }

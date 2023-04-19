@@ -16,8 +16,10 @@ namespace TecnoShop.Models
 
             get
             {
-                //retorne todas los productos incluyendo la categoria
-                return _tecnoShopDbContext.Productos.Include(x => x.Categoria);
+                //retorne todas los productos incluyendo la categoria y marca
+                return _tecnoShopDbContext.Productos
+                    .Include(x => x.Categoria)
+                    .Include(x => x.Marca);
             }
         }
 

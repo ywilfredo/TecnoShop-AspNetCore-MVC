@@ -17,14 +17,17 @@
         </div>
     }
 
-    @*<p>
+    <p>
         <a asp-action="CrearProducto"> Crear Producto</a>
-    </p>*@
+    </p>
     @*<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#myModal" data-url="@Url.Action("CrearCategoria")"> Crear Categoria</button>
     *@
-    <table class="table">
+    <table class="table tabla-productos">
         <thead>
             <tr>
+                <th>
+                    Imagen
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
@@ -48,10 +51,13 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
+                        <img src="@item.ImagenUrl" alt="" style="max-width:50px;" />
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Especificaciones)
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td class="ellipsis">
+                        @item.Especificaciones
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Marca.Nombre)
@@ -62,11 +68,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Precio)
                     </td>
-                    @*<td>
+                    <td>
                         <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId"> Editar </a> |
                         <a asp-action="DetalleCategoria" asp-route-id="@item.CategoriaId"> Detalle </a> |
                         <a asp-action="EliminarCategoria" asp-route-id="@item.CategoriaId"> Eliminar </a>
-                    </td>*@
+                    </td>
                 </tr>
             }
         </tbody>

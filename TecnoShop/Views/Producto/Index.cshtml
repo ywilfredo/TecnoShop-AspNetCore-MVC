@@ -1,8 +1,9 @@
-﻿@model IEnumerable<TecnoShop.Models.Producto>
+﻿@*@model IEnumerable<TecnoShop.Models.Producto>*@
+@model ProductoViewModel;
 
 @{
     ViewData["Title"] = "Index";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 <section class="container seccion">
     <h1>Listado de Productos</h1>
@@ -29,25 +30,25 @@
                     Imagen
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
+                    Nombre
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Especificaciones)
+                    Especificaciones
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Marca)
+                    Marca
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Categoria)
+                    Categoria
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Precio)
+                    Precio
                 </th>
             </tr>
 
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Productos)
             {
                 <tr>
                     <td>

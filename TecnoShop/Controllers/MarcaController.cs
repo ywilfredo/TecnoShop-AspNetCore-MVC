@@ -17,7 +17,7 @@ namespace TecnoShop.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<Marca> marcas = _marcaRepositorio.TodasLasMarcas();
+            IEnumerable<Marca> marcas = _marcaRepositorio.TodasLasMarcas;
             return View(marcas);
         }
 

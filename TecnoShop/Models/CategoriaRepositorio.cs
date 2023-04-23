@@ -1,4 +1,5 @@
-﻿using System.IO.Pipelines;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO.Pipelines;
 
 namespace TecnoShop.Models
 {
@@ -10,13 +11,21 @@ namespace TecnoShop.Models
             _tecnoShopDbContext = tecnoShopDbContext;
         }
 
-        //public IEnumerable<Categoria> TodasLasCategorias => _tecnoShopDbContext.Categorias.OrderBy(x => x.CategoriaId);
 
-        public IEnumerable<Categoria> TodasLasCategorias()
-        {
-            List<Categoria> categorias = _tecnoShopDbContext.Categorias.ToList();
-            return categorias;
-        }
+        //public IEnumerable<Categoria> TodasLasCategorias()
+        //{
+        //    List<Categoria> categorias = _tecnoShopDbContext.Categorias.ToList();
+        //    return categorias;
+        //}
+
+
+        //public IEnumerable<Categoria> TodasLasCategorias
+        //{
+        //    get { return _tecnoShopDbContext.Categorias; }
+        //}
+
+
+        public IEnumerable<Categoria> TodasLasCategorias => _tecnoShopDbContext.Categorias.OrderBy(x => x.CategoriaId);
 
 
         public Categoria? ObtenerCategoria(int categoriaId)
@@ -45,5 +54,22 @@ namespace TecnoShop.Models
             _tecnoShopDbContext.SaveChanges();
         }
 
+        public List<SelectListItem> CategoriaItems()
+        {
+            var listaCategorias = new List<SelectListItem>();
+            List<Categoria> categorias = _tecnoShopDbContext.Categorias.ToList();
+            listaCategorias = categorias.Select(cat => new SelectListItem()
+            {
+                Value = cat.CategoriaId.ToString(),
+                Text = cat.Nombre
+            }).ToList();
+            var defItem = new SelectListItem()
+            {
+                Value = "",
+                Text = "-- Selecciona una Categoría --"
+            };
+            listaCategorias.Insert(0, defItem);
+            return listaCategorias;
+        }
     }
 }

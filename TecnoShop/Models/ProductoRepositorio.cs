@@ -11,6 +11,7 @@ namespace TecnoShop.Models
             _tecnoShopDbContext = tecnoShopDbContext;
         }
 
+
         public IEnumerable<Producto> TodosLosProductos
         {
 
@@ -22,6 +23,7 @@ namespace TecnoShop.Models
                     .Include(x => x.Marca);
             }
         }
+
 
 
         public IEnumerable<Producto> ProductoDestacado
@@ -44,6 +46,12 @@ namespace TecnoShop.Models
         public IEnumerable<Producto> BuscarProductos(string searchQuery)
         {
             throw new NotImplementedException();
+        }
+
+        public void CrearProducto(Producto producto)
+        {
+            _tecnoShopDbContext.Productos.Add(producto);
+            _tecnoShopDbContext.SaveChanges();
         }
     }
 }

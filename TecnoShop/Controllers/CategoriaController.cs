@@ -18,7 +18,7 @@ namespace TecnoShop.Controllers
 
             //ListaCategoriaViewModel listaCategoriaViewModel = new ListaCategoriaViewModel(_categoriaRepositorio.TodasLasCategorias);
             //return View(listaCategoriaViewModel);
-            IEnumerable<Categoria> categorias = _categoriaRepositorio.TodasLasCategorias();
+            IEnumerable<Categoria> categorias = _categoriaRepositorio.TodasLasCategorias;
             return View(categorias);
 
         }

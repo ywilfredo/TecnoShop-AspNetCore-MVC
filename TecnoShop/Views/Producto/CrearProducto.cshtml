@@ -1,0 +1,93 @@
+﻿@*@model TecnoShop.Models.Producto*@
+@model TecnoShop.ViewModels.ProductoViewModel
+@{
+    ViewData["Title"] = "CrearProducto";
+}
+
+<section class="container seccion">
+    <h1>Crear Producto</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CrearProducto">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Producto.Nombre" class="control-label"></label>
+                    <input asp-for="Producto.Nombre" class="form-control" />
+                    <span asp-validation-for="Producto.Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Producto.Especificaciones" class="control-label"></label>
+                    <textarea asp-for="Producto.Especificaciones" class="form-control" placeholder="escriba las especificaciones aquí.." id="floatingTextarea" style="height: 100px;"></textarea>
+                    <span asp-validation-for="Producto.Especificaciones" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">Cargar Imagen</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Producto.Precio" class="control-label"></label>
+                    <input type ="number" asp-for="Producto.Precio" class="form-control" />
+                    <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+                </div>
+
+               <div class="form-group">
+                    <label asp-for="Producto.CategoriaId" class="control-label"></label>
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>-- Selecciona una categoría --</option>
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <option value="@categoria.CategoriaId">@categoria.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Producto.CategoriaId" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+                    <label asp-for="Producto.CategoriaId" class="control-label"></label>
+                    <select asp-for="Producto.CategoriaId" class="form-select sform-control" asp-items="CategoriaItems"></select>
+                    <span asp-validation-for="Producto.CategoriaId" class="text-danger"></span>
+                </div>*@
+
+                <div class="form-group">
+                    <label asp-for="Producto.MarcaId" class="control-label"></label>
+                    @*<select  id="listaCategorias" asp-for="CategoriaId" class="form-select sform-control" asp-items="ViewBag.Categoria"></select>*@
+
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>-- Selecciona una marca --</option>
+                        @foreach (var marca in Model.Marcas)
+                        {
+                            <option value="@marca.MarcaId.ToString()">@marca.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Producto.MarcaId" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <input asp-for="Producto.Disponible" class="form-check-input" type="checkbox" id="gridCheck1">
+                    <label class="form-check-label" for="gridCheck1">
+                        Disponible
+                    </label>
+                    <span asp-validation-for="Producto.Disponible" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <input asp-for="Producto.Destacado" class="form-check-input" type="checkbox" id="gridCheck1">
+                    <label class="form-check-label" for="gridCheck1">
+                        Destacado
+                    </label>
+                    <span asp-validation-for="Producto.Destacado" class="text-danger"></span>
+                </div>
+  
+                <br />
+
+                <div class="form-group">
+                    <input type="submit" value="Crear Producto" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-action="Index"> Atrás</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</section>

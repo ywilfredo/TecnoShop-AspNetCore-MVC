@@ -7,5 +7,7 @@
         IEnumerable<Producto> ProductoDestacado { get; }
         Producto? ObtenerProductoPorId(int productoId);
         IEnumerable<Producto> BuscarProductos(string searchQuery);
+
+        void CrearProducto(Producto producto);
     }
 }

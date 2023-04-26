@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<TecnoShop.Models.Producto>*@
-@model ProductoViewModel;
+@model ListaProductoViewModel;
 
 @{
     ViewData["Title"] = "Index";
@@ -52,7 +52,8 @@
             {
                 <tr>
                     <td>
-                        <img src="@item.ImagenUrl" alt="" style="max-width:50px;" />
+                        <img src="~/images/@item.ImagenUrl" alt="" style="max-width:50px;" />
+                        @*<img src="@("~/images/"+item.ImagenUrl)" asp-append-version="true" alt="" style="max-width:50px;" />*@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nombre)

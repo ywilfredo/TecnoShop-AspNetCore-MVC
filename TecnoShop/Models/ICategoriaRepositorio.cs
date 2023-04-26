@@ -6,7 +6,7 @@ namespace TecnoShop.Models
     {
         IEnumerable<Categoria> TodasLasCategorias { get; }
         Categoria? ObtenerCategoria(int categoriaId);
-        List<SelectListItem> CategoriaItems();
+        //List<SelectListItem> CategoriaItems();
 
         void CrearCategoria(Categoria categoria);
 

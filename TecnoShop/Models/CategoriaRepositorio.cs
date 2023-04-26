@@ -54,22 +54,22 @@ namespace TecnoShop.Models
             _tecnoShopDbContext.SaveChanges();
         }
 
-        public List<SelectListItem> CategoriaItems()
-        {
-            var listaCategorias = new List<SelectListItem>();
-            List<Categoria> categorias = _tecnoShopDbContext.Categorias.ToList();
-            listaCategorias = categorias.Select(cat => new SelectListItem()
-            {
-                Value = cat.CategoriaId.ToString(),
-                Text = cat.Nombre
-            }).ToList();
-            var defItem = new SelectListItem()
-            {
-                Value = "",
-                Text = "-- Selecciona una Categoría --"
-            };
-            listaCategorias.Insert(0, defItem);
-            return listaCategorias;
-        }
+        //public List<SelectListItem> CategoriaItems()
+        //{
+        //    var listaCategorias = new List<SelectListItem>();
+        //    List<Categoria> categorias = _tecnoShopDbContext.Categorias.ToList();
+        //    listaCategorias = categorias.Select(cat => new SelectListItem()
+        //    {
+        //        Value = cat.CategoriaId.ToString(),
+        //        Text = cat.Nombre
+        //    }).ToList();
+        //    var defItem = new SelectListItem()
+        //    {
+        //        Value = "",
+        //        Text = "-- Selecciona una Categoría --"
+        //    };
+        //    listaCategorias.Insert(0, defItem);
+        //    return listaCategorias;
+        //}
     }
 }

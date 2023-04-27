@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TecnoShop.ViewModels;
+
 namespace TecnoShop.Models
 {
     public class ProductoRepositorio : IProductoRepositorio
@@ -17,10 +19,10 @@ namespace TecnoShop.Models
 
             get
             {
-                //retorne todas los productos incluyendo la categoria y marca
+                //retorne todas los productos incluyendo la categoria y marca -- aumente el ToList() al final
                 return _tecnoShopDbContext.Productos
                     .Include(x => x.Categoria)
-                    .Include(x => x.Marca);
+                    .Include(x => x.Marca).ToList();
             }
         }
 
@@ -48,9 +50,32 @@ namespace TecnoShop.Models
             throw new NotImplementedException();
         }
 
-        public void CrearProducto(Producto producto)
+        //public void CrearProducto(Producto producto)
+        //{
+        //    _tecnoShopDbContext.Productos.Add(producto);
+        //    _tecnoShopDbContext.SaveChanges();
+        //}
+        public async Task<int> CrearProducto(ProductCreateViewModel productoVM)
         {
-            _tecnoShopDbContext.Productos.Add(producto);
+            var producto = new Producto()
+            {
+                Nombre = productoVM.Nombre,
+                Especificaciones = productoVM.Especificaciones,
+                Precio = productoVM.Precio,
+                Disponible = productoVM.Disponible,
+                Destacado = productoVM.Destacado,
+                ImagenUrl = productoVM.ImagenUrl,
+                MarcaId = productoVM.MarcaId,
+                CategoriaId = productoVM.CategoriaId
+            };
+            await _tecnoShopDbContext.Productos.AddAsync(producto);
+             await _tecnoShopDbContext.SaveChangesAsync();
+            return producto.ProductoId;
+        }
+
+        public void EditarProducto(Producto producto)
+        {
+            _tecnoShopDbContext.Productos.Remove(producto);
             _tecnoShopDbContext.SaveChanges();
         }
     }

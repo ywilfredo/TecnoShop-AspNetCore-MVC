@@ -1,0 +1,57 @@
+﻿@model TecnoShop.Models.Producto
+
+@{
+    ViewData["Title"] = "DetalleProducto";
+}
+
+<div class="container seccion">
+    <h3 class="display-4">Detalle</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/images/@Model.ImagenUrl" alt="">
+
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Nombre</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-primary">
+                    <span class="label label-primary"> By: </span>
+                    <span class="monospaced">Autor</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="description">
+                        @Model.Especificaciones
+                    </p>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <button class="btn btn-outline-primary">Editar</button>
+                </div>
+            </div>
+            <hr />
+            <ul class="list-group">
+                <li class="list-group-item"> <span class="font-weight-bold"> Precio - </span> @Model.Precio</li>
+                <li class="list-group-item"> <span class="font-weight-bold"> Desponible - </span> @Model.Disponible</li>
+                <li class="list-group-item"> <span class="font-weight-bold"> Destacado - </span> @Model.Destacado</li>
+                <li class="list-group-item"> <span class="font-weight-bold"> Categoria - </span> @Model.CategoriaId</li>
+                <li class="list-group-item"> <span class="font-weight-bold"> Marca - </span> @Model.MarcaId</li>
+            </ul>
+            <hr/>
+            <div>
+                <a asp-action="EditarCategoria" asp-route-id="@Model?.CategoriaId" class="btn btn-primary">Editar</a> |
+                <a asp-action="Index" class="btn btn-secondary">Volver atrás</a>
+            </div>
+
+        </div>
+    </div>
+    
+
+</div>

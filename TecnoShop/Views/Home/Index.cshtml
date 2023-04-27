@@ -66,7 +66,7 @@
                     </div>
                     <div class="card-body bg-light text-center">
                         <div class="mb-2">
-                            <h6 class="font-weight-semibold mb-2"> <a asp-controller="Producto" asp-action="Especificacion" asp-route-id="@producto.ProductoId" class="text-default mb-2" data-abc="true">@producto.Nombre</a></h6>
+                            <h6 class="font-weight-semibold mb-2"> <a asp-controller="Producto" asp-action="DescripcionProducto" asp-route-id="@producto.ProductoId" class="text-default mb-2" data-abc="true">@producto.Nombre</a></h6>
                             <a href="#" class="text-muted" data-abc="true">@producto.Categoria.Nombre</a>
 
                         </div>
@@ -79,7 +79,7 @@
                             <i class="bi bi-star"></i>
                         </div>
                         <div class="text-muted mb-3">34 reviews</div>
-                        <a class="btn bg-cart" asp-controller="Producto" asp-action="Especificacion" asp-route-id="@producto.ProductoId"><i class="bi bi-eye"></i> Ver Especificaciones</a>
+                        <a class="btn bg-cart" asp-controller="Producto" asp-action="DescripcionProducto" asp-route-id="@producto.ProductoId"><i class="bi bi-eye"></i> Ver Especificaciones</a>
                         
                     </div>
                 </div>

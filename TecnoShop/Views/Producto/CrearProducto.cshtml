@@ -8,36 +8,36 @@
     <h1>Crear Producto</h1>
     <hr />
     <div class="row">
-        <div class="col-md-4">
-            <form asp-action="CrearProducto" method="post" enctype="multipart/form-data">
+        <div class="col-md-6">
+            <form asp-action="CrearProducto"  enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Nombre" class="control-label"></label>
-                    <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <label asp-for="@Model.Nombre" class="control-label"></label>
+                    <input asp-for="@Model.Nombre" class="form-control" />
+                    <span asp-validation-for="@Model.Nombre" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Especificaciones" class="control-label"></label>
-                    <textarea asp-for="Especificaciones" class="form-control" placeholder="escriba las especificaciones aquí.." id="floatingTextarea" style="height: 100px;"></textarea>
-                    <span asp-validation-for="Especificaciones" class="text-danger"></span>
+                    <label asp-for="@Model.Especificaciones" class="control-label"></label>
+                    <textarea asp-for="@Model.Especificaciones" class="form-control" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <span asp-validation-for="@Model.Especificaciones" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ImageFile" class="control-label"></label>
-                    <input asp-for="ImageFile" accept="image/*" multiple>
-                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    @*<label asp-for="@Model.ImageFile" class="control-label"></label>*@
+                    <input asp-for="@Model.ImageFile" accept="image/*" multiple>
+                    <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Precio" class="control-label"></label>
-                    <input type ="number" asp-for="Precio" class="form-control" />
-                    <span asp-validation-for="Precio" class="text-danger"></span>
+                    <label asp-for="@Model.Precio" class="control-label"></label>
+                    <input asp-for="@Model.Precio" type="number" value="" class="form-control" />
+                    <span asp-validation-for="@Model.Precio" class="text-danger"></span>
                 </div>
 
                <div class="form-group">
-                    <label asp-for="CategoriaId" class="control-label"></label>
-                    <select asp-for="CategoriaId" class="form-select sform-control" asp-items="@Model.CategoriasItems">
+                    <label asp-for="@Model.CategoriaId" class="control-label"></label>
+                    <select asp-for="@Model.CategoriaId" class="form-select sform-control" asp-items="@Model.CategoriasItems">
                         <option value="">selecciona una categoria</option>
                     </select>
-                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    <span asp-validation-for="@Model.CategoriaId" class="text-danger"></span>
                 </div>
 
                 @*div class="form-group">
@@ -47,14 +47,14 @@
                 </div>*@
 
                 <div class="form-group">
-                    <label asp-for="MarcaId" class="control-label"></label>
-                    <select asp-for="MarcaId" class="form-select sform-control" asp-items="@Model.MarcasItems">
+                    <label asp-for="@Model.MarcaId" class="control-label"></label>
+                    <select asp-for="@Model.MarcaId" class="form-select sform-control" asp-items="@Model.MarcasItems">
                         <option value="">selecciona una marca</option>
                     </select>
-                    <span asp-validation-for="MarcaId" class="text-danger"></span>
+                    <span asp-validation-for="@Model.MarcaId" class="text-danger"></span>
                 </div>
                 <div class="form-group form-check">
-                    <input asp-for="Disponible" class="form-check-input" type="checkbox" id="gridCheck1">
+                    <input asp-for="@Model.Disponible" class="form-check-input" type="checkbox" id="gridCheck1">
                     <label class="form-check-label" for="gridCheck1">
                         Disponible
                     </label>
@@ -64,7 +64,7 @@
                     </label>*@
                 </div>
                 <div class="form-group form-check">
-                    <input asp-for="Destacado" class="form-check-input" type="checkbox" id="gridCheck1">
+                    <input asp-for="@Model.Destacado" class="form-check-input" type="checkbox" id="gridCheck1">
                     <label class="form-check-label" for="gridCheck1">
                         Destacado
                     </label>
@@ -82,7 +82,11 @@
     </div>
 
 </section>
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
 
 @*//usando solo la clase categoria
 <select class="form-select" id="floatingSelect" aria-label="Floating label select example">

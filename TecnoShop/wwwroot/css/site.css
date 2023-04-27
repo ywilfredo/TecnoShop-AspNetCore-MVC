@@ -244,3 +244,19 @@ footer {
         overflow: visible;
         cursor: pointer;
     }
+
+/* FORMULARIO CREAR PRODUCTO*/
+.form-group {
+    margin-bottom: 0.7rem;
+}
+
+.form-control {
+    height: 48px;
+    background: #fff;
+    color: #000;
+    font-size: 14px;
+    border-radius: 2px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}

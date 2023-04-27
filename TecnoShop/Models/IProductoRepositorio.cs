@@ -1,4 +1,6 @@
-﻿namespace TecnoShop.Models
+﻿using TecnoShop.ViewModels;
+
+namespace TecnoShop.Models
 {
     public interface IProductoRepositorio
     {
@@ -8,6 +10,7 @@
         Producto? ObtenerProductoPorId(int productoId);
         IEnumerable<Producto> BuscarProductos(string searchQuery);
 
-        void CrearProducto(Producto producto);
+        public Task<int> CrearProducto(ProductCreateViewModel productovm);
+        void EditarProducto(Producto producto);
     }
 }

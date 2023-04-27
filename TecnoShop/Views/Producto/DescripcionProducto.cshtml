@@ -1,4 +1,7 @@
 ﻿@model Producto
+@{
+    ViewData["Title"] = "DescripcionProducto";
+}
 <section class="container seccion">
     <h3 class="my-5">
         @Model.Nombre
@@ -11,7 +14,7 @@
             <h3 class="pull-right">@Model.Precio.ToString()</h3>
             <div class="addToCart">
                 <p class="button">
-                    <a class="btn btn-secondary" asp-controller="ShoppingCart" asp-action="AddShoppingCart" asp-route-pieId="@Model.ProductoId"> Add to Cart</a>
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddShoppingCart" asp-route-pieId="@Model.ProductoId"> Add to Cart</a>
                     <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Atrás</a>
                 </p>
             </div>

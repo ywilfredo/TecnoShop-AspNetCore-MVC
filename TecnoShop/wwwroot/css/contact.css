@@ -2296,9 +2296,9 @@ textarea.form-control {
     height: auto;
 }
 
-.form-group {
+/*.form-group {
     margin-bottom: 1rem;
-}
+}*/
 
 .form-text {
     display: block;
@@ -11311,6 +11311,8 @@ a.text-dark:hover, a.text-dark:focus {
     }
 }
 
+
+
 body {
     font-family: "Poppins", Arial, sans-serif;
     font-size: 16px;
@@ -11319,6 +11321,9 @@ body {
     background: #fafafa;
     color: gray;
 }
+
+
+
 
 a {
     -webkit-transition: .3s all ease;
@@ -11369,7 +11374,9 @@ h1, h2, h3, h4, h5,
     background-position: center center;
 }
 
-.form-control {
+
+
+/*.form-control {
     height: 48px;
     background: #fff;
     color: #000;
@@ -11378,25 +11385,27 @@ h1, h2, h3, h4, h5,
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     border: 1px solid rgba(0, 0, 0, 0.1);
-}
+}*/
 
-    .form-control::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
+
+
+    /*.form-control::-webkit-input-placeholder {
+        
         color: rgba(0, 0, 0, 0.7) !important;
     }
 
     .form-control::-moz-placeholder {
-        /* Firefox 19+ */
+       
         color: rgba(0, 0, 0, 0.7) !important;
     }
 
     .form-control:-ms-input-placeholder {
-        /* IE 0+ */
+        
         color: rgba(0, 0, 0, 0.7) !important;
     }
 
     .form-control:-moz-placeholder {
-        /* Firefox 18- */
+      
         color: rgba(0, 0, 0, 0.7) !important;
     }
 
@@ -11406,7 +11415,7 @@ h1, h2, h3, h4, h5,
 
 textarea.form-control {
     height: inherit !important;
-}
+}*/
 
 .wrapper {
     width: 100%;

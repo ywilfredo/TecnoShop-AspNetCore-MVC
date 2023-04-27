@@ -71,9 +71,9 @@
                         @Html.DisplayFor(modelItem => item.Precio)
                     </td>
                     <td>
-                        <a asp-action="EditarCategoria" asp-route-id="@item.CategoriaId"> Editar </a> |
-                        <a asp-action="DetalleCategoria" asp-route-id="@item.CategoriaId"> Detalle </a> |
-                        <a asp-action="EliminarCategoria" asp-route-id="@item.CategoriaId"> Eliminar </a>
+                        <a asp-action="Editar" asp-route-id="@item.ProductoId"> Editar </a> |
+                        <a asp-action="DetalleProducto" asp-route-id="@item.ProductoId"> Detalle </a> |
+                        <a asp-action="EliminarProducto" asp-route-id="@item.ProductoId"> Eliminar </a>
                     </td>
                 </tr>
             }

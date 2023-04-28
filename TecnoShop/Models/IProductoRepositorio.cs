@@ -8,9 +8,11 @@ namespace TecnoShop.Models
         //IEnumerable<Producto> TodosLosProductos();
         IEnumerable<Producto> ProductoDestacado { get; }
         Producto? ObtenerProductoPorId(int productoId);
+        ProductoViewModel? ObtenerProducto(int id);
         IEnumerable<Producto> BuscarProductos(string searchQuery);
 
-        public Task<int> CrearProducto(ProductCreateViewModel productovm);
-        void EditarProducto(Producto producto);
+        public Task<int> CrearProducto(ProductoViewModel productovm);
+        //public Task<int> EditarProducto(ProductCreateViewModel productovm);
+        void EditarProducto(ProductoViewModel productovm);
     }
 }

@@ -51,55 +51,65 @@ namespace TecnoShop.Controllers
 
         public IActionResult DetalleProducto(int id)  
         {
-            var producto = _productoRepositorio.ObtenerProductoPorId(id);
-            if (producto == null)
-                return NotFound();
-            return View(producto);
+            var productoVM = _productoRepositorio.ObtenerProducto(id);
+            productoVM.CategoriasItems = CargarCategoriasItems();
+            productoVM.MarcasItems = CargarMarcasItems();
+            
+            foreach(var cate in _categoriaRepositorio.TodasLasCategorias)
+            {
+               if(productoVM.CategoriaId == cate.CategoriaId)
+                {
+                    productoVM.NombreCategoria = cate.Nombre;
+                }
+            }
+            foreach (var marca in _marcaRepositorio.TodasLasMarcas)
+            {
+                if (productoVM.MarcaId == marca.MarcaId)
+                {
+                    productoVM.NombreMarca = marca.Nombre;
+                }
+            }
+            if (productoVM.Disponible)
+                productoVM.EstaDisponible = "Sí";
+            else productoVM.EstaDisponible = "No";
+
+            if (productoVM.Destacado)
+                productoVM.EsDestacado = "Sí";
+            else productoVM.EsDestacado = "No";
+                
+            return View(productoVM);
         }
 
 
         public IActionResult CrearProducto()
         {
-            ProductCreateViewModel productCreateViewModel = new ProductCreateViewModel();
+            ProductoViewModel productCreateViewModel = new ProductoViewModel();
 
-            //Cargar las categorias de la base de datos al ViewModel
-            List<SelectListItem> categorias = _categoriaRepositorio.TodasLasCategorias
-                .OrderBy(c => c.Nombre)
-                     .Select(c =>
-                      new SelectListItem
-                      {
-                          Value = c.CategoriaId.ToString(),
-                          Text = c.Nombre
-                      }).ToList();
-            productCreateViewModel.CategoriasItems = categorias;
-
-            //Cargar las marcas de la base de datos al ViewModel
-            List<SelectListItem> marcas = _marcaRepositorio.TodasLasMarcas
-                .OrderBy(m => m.Nombre)
-                     .Select(m =>
-                      new SelectListItem
-                      {
-                          Value = m.MarcaId.ToString(),
-                          Text = m.Nombre
-                      }).ToList();
-            productCreateViewModel.MarcasItems = marcas;
+            
+            productCreateViewModel.CategoriasItems = CargarCategoriasItems();
+            productCreateViewModel.MarcasItems = CargarMarcasItems();
 
             return View(productCreateViewModel);
         }
         [HttpPost]
-        public  async Task<IActionResult> CrearProducto(ProductCreateViewModel productViewModel)
+        public  async Task<IActionResult> CrearProducto(ProductoViewModel productoViewModel)
         {
 
            
             if (ModelState.IsValid)
             {
-                if (productViewModel.ImageFile != null)
+                if (productoViewModel.ArchivoImagen != null)
                 {
-                    productViewModel.ImagenUrl = SubirArchivo(productViewModel);
+                    //productViewModel.ImagenUrl = GuardarImagen(productViewModel);
+                    string folder = "images/";
+                    folder += Guid.NewGuid().ToString() + "_" + productoViewModel.ArchivoImagen.FileName;
+                    productoViewModel.ImagenUrl = "/" + folder;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    await productoViewModel.ArchivoImagen.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    
                 }
 
-                //GuardarProducto
-                int id = await _productoRepositorio.CrearProducto(productViewModel);
+                int id = await _productoRepositorio.CrearProducto(productoViewModel);
                 if(id > 0)
                 {
                     TempData["mensaje"] = "El producto se creó correctamente";
@@ -107,91 +117,41 @@ namespace TecnoShop.Controllers
                 }
                 
             }
-            return View(productViewModel);
+            return View(productoViewModel);
 
         }
 
 
-
-
-        private string SubirArchivo(ProductCreateViewModel productViewModel)
+        private string GuardarImagen(ProductoViewModel productViewModel)
         {
             string fileName = null;
-            if (productViewModel.ImageFile != null)
+            if (productViewModel.ArchivoImagen != null)
             {
-                string folder = "images";
-                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                fileName = Guid.NewGuid().ToString() + "-" + productViewModel.ImageFile.FileName;
+                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath,"images");
+                fileName = Guid.NewGuid().ToString() + "-" + productViewModel.ArchivoImagen.FileName;
                 string filePath = Path.Combine(serverFolder, fileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    productViewModel.ImageFile.CopyTo(fileStream);
+                    productViewModel.ArchivoImagen.CopyTo(fileStream);
                 }
             }
             return fileName;
         }
 
-        //Guardar Archivo
-        private string GuardarAchivo(ProductCreateViewModel productViewModel)
-        {
-            string folder = null;
-            if (productViewModel.ImageFile != null)
-            {
-                folder = "images/"; //fileName
-                folder += Guid.NewGuid().ToString() + "_" + productViewModel.ImageFile.FileName;
-                //productViewModel.ImagenUrl = "/"+folder;
-                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                productViewModel.ImageFile.CopyTo(new FileStream(serverFolder, FileMode.Create));
-            }
-            return folder;
-        }
 
 
         public IActionResult EditarProducto(int id)
         {
-            Producto? producto = _productoRepositorio.ObtenerProductoPorId(id);
+            var productoVM = _productoRepositorio.ObtenerProducto(id);
+            productoVM.CategoriasItems = CargarCategoriasItems();
+            productoVM.MarcasItems = CargarMarcasItems();
 
-            ProductCreateViewModel productCreateViewModel = new ProductCreateViewModel
-            {
-                Nombre = producto.Nombre,
-                Especificaciones = producto.Especificaciones,
-                Precio = producto.Precio,
-                Disponible = producto.Disponible,
-                Destacado = producto.Destacado,
-                CategoriaId = producto.CategoriaId,
-                MarcaId = producto.MarcaId,
-                ImagenUrl = producto.ImagenUrl
-            };
-
-            //Cargar las categorias de la base de datos al ViewModel
-            List<SelectListItem> categorias = _categoriaRepositorio.TodasLasCategorias
-                .OrderBy(c => c.Nombre)
-                     .Select(c =>
-                      new SelectListItem
-                      {
-                          Value = c.CategoriaId.ToString(),
-                          Text = c.Nombre
-                      }).ToList();
-
-            productCreateViewModel.CategoriasItems = categorias;
-
-            //Cargar las marcas de la base de datos al ViewModel
-            List<SelectListItem> marcas = _marcaRepositorio.TodasLasMarcas
-                .OrderBy(m => m.Nombre)
-                     .Select(m =>
-                      new SelectListItem
-                      {
-                          Value = m.MarcaId.ToString(),
-                          Text = m.Nombre
-                      }).ToList();
-            productCreateViewModel.MarcasItems = marcas;
-
-            return View(productCreateViewModel);
+            return View(productoVM);
 
         }
 
         //[HttpPost]
-        //public IActionResult EditarProducto(ProductCreateViewModel productViewModel)
+        //public IActionResult EditarProductoAntes(ProductCreateViewModel productViewModel)
         //{
         //    var producto = new Producto();
         //    if (ModelState.IsValid)
@@ -215,6 +175,36 @@ namespace TecnoShop.Controllers
 
         //    return View(producto);
         //}
+
+
+
+        //Obtener MarcasItems
+        public List<SelectListItem> CargarMarcasItems()
+        {
+            List<SelectListItem> marcas = _marcaRepositorio.TodasLasMarcas
+                .OrderBy(m => m.Nombre)
+                     .Select(m =>
+                      new SelectListItem
+                      {
+                          Value = m.MarcaId.ToString(),
+                          Text = m.Nombre
+                      }).ToList();
+            return marcas;
+        }
+
+        //Obtener CategoriasItems
+        public List<SelectListItem> CargarCategoriasItems()
+        {
+            List<SelectListItem> categorias = _categoriaRepositorio.TodasLasCategorias
+               .OrderBy(c => c.Nombre)
+                    .Select(c =>
+                     new SelectListItem
+                     {
+                         Value = c.CategoriaId.ToString(),
+                         Text = c.Nombre
+                     }).ToList();
+            return categorias;
+        }
     }
 }
 

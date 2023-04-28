@@ -1,15 +1,19 @@
-﻿@model TecnoShop.Models.Producto
+﻿@model TecnoShop.ViewModels.ProductoViewModel
 
 @{
     ViewData["Title"] = "DetalleProducto";
 }
 
-<div class="container seccion">
-    <h3 class="display-4">Detalle</h3>
+<section class="container seccion">
     <div class="row">
+        
         <div class="col-md-6">
-            <img src="~/images/@Model.ImagenUrl" alt="">
-
+            <div class="row">
+                <h3>Detalle del Producto</h3>
+            </div>
+            <div class="row">
+                <img src="@Model.ImagenUrl" alt="">
+            </div>
         </div>
         <div class="col-md-6">
             <div class="row">
@@ -19,8 +23,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-primary">
-                    <span class="label label-primary"> By: </span>
-                    <span class="monospaced">Autor</span>
+                    <span class="monospaced">Especificaciones:</span>
                 </div>
             </div>
             <div class="row">
@@ -31,22 +34,58 @@
 
                 </div>
             </div>
+    
+            <hr />
+
+            
             <div class="row">
-                <div class="col-md-4">
-                    <button class="btn btn-outline-primary">Editar</button>
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.Precio $us</label>
                 </div>
             </div>
-            <hr />
-            <ul class="list-group">
-                <li class="list-group-item"> <span class="font-weight-bold"> Precio - </span> @Model.Precio</li>
-                <li class="list-group-item"> <span class="font-weight-bold"> Desponible - </span> @Model.Disponible</li>
-                <li class="list-group-item"> <span class="font-weight-bold"> Destacado - </span> @Model.Destacado</li>
-                <li class="list-group-item"> <span class="font-weight-bold"> Categoria - </span> @Model.CategoriaId</li>
-                <li class="list-group-item"> <span class="font-weight-bold"> Marca - </span> @Model.MarcaId</li>
-            </ul>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Disponible: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.EstaDisponible</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Destacado: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.EsDestacado</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Categoría: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.NombreCategoria</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Marca: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.NombreMarca</label>
+                </div>
+            </div>
+
+           
+            @*<div class="row">
+                <label class="col-sm-3 col-form-label">Categoría: </label>
+                <div class="col-sm-9">
+                    <select asp-for="@Model.CategoriaId" class="form-select" asp-items="@Model.CategoriasItems" disabled></select>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Marca: </label>
+                <div class="col-sm-9">
+                    <select asp-for="@Model.MarcaId" class="form-select" asp-items="@Model.MarcasItems" disabled></select>
+                </div>
+            </div>*@
+           
             <hr/>
             <div>
-                <a asp-action="EditarCategoria" asp-route-id="@Model?.CategoriaId" class="btn btn-primary">Editar</a> |
+                <a asp-action="EditarProducto" asp-route-id="@Model?.ProductoId" class="btn btn-primary">Editar</a> |
                 <a asp-action="Index" class="btn btn-secondary">Volver atrás</a>
             </div>
 
@@ -54,4 +93,4 @@
     </div>
     
 
-</div>
+</section>

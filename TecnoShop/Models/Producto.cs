@@ -8,9 +8,9 @@ namespace TecnoShop.Models
         
         [Required(ErrorMessage = "Por favor ingrese el nombre del producto")]
         [Display(Name = "Nombre")]
-        public string? Nombre { get; set; }
-        public string? Especificaciones { get; set; }
-        
+        public string Nombre { get; set; } = string.Empty;
+        public string Especificaciones { get; set; } = string.Empty;
+
         [Required(ErrorMessage = "Por favor ingrese el precio del producto")]
         [Display(Name = "Precio")]
         public decimal Precio { get; set; }

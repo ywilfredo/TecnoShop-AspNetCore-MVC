@@ -1,5 +1,5 @@
 ﻿@*@model TecnoShop.Models.Producto*@
-@model TecnoShop.ViewModels.ProductCreateViewModel
+@model TecnoShop.ViewModels.ProductoViewModel
 @{
     ViewData["Title"] = "CrearProducto";
 }
@@ -9,7 +9,7 @@
     <hr />
     <div class="row">
         <div class="col-md-6">
-            <form asp-action="CrearProducto"  enctype="multipart/form-data">
+            <form asp-action="CrearProducto" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="@Model.Nombre" class="control-label"></label>
@@ -23,8 +23,8 @@
                 </div>
                 <div class="form-group">
                     @*<label asp-for="@Model.ImageFile" class="control-label"></label>*@
-                    <input asp-for="@Model.ImageFile" accept="image/*" multiple>
-                    <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                    <input asp-for="@Model.ArchivoImagen" accept="image/*" multiple>
+                    <span asp-validation-for="@Model.ArchivoImagen" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Precio" class="control-label"></label>

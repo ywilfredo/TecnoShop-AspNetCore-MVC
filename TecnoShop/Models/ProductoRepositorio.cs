@@ -45,6 +45,9 @@ namespace TecnoShop.Models
             return _tecnoShopDbContext.Productos.FirstOrDefault(p => p.ProductoId == productoId);
         }
 
+        
+
+
         public IEnumerable<Producto> BuscarProductos(string searchQuery)
         {
             throw new NotImplementedException();
@@ -55,7 +58,7 @@ namespace TecnoShop.Models
         //    _tecnoShopDbContext.Productos.Add(producto);
         //    _tecnoShopDbContext.SaveChanges();
         //}
-        public async Task<int> CrearProducto(ProductCreateViewModel productoVM)
+        public async Task<int> CrearProducto(ProductoViewModel productoVM)
         {
             var producto = new Producto()
             {
@@ -73,10 +76,53 @@ namespace TecnoShop.Models
             return producto.ProductoId;
         }
 
-        public void EditarProducto(Producto producto)
+
+        public ProductoViewModel? ObtenerProducto(int id)
         {
-            _tecnoShopDbContext.Productos.Remove(producto);
-            _tecnoShopDbContext.SaveChanges();
+            return _tecnoShopDbContext.Productos.Where(p => p.ProductoId == id)
+                .Select(productVm => new ProductoViewModel()
+                {
+                    ProductoId = productVm.ProductoId,
+                    Nombre = productVm.Nombre,
+                    Especificaciones = productVm.Especificaciones,
+                    Precio = productVm.Precio,
+                    Disponible = productVm.Disponible,
+                    Destacado = productVm.Destacado,
+                    ImagenUrl = productVm.ImagenUrl,
+                    CategoriaId = productVm.CategoriaId,
+                    MarcaId = productVm.MarcaId
+                }).FirstOrDefault();
         }
+
+
+        public void EditarProducto(ProductoViewModel productoVM)
+        {
+            var producto = new Producto()
+            {
+                ProductoId= productoVM.ProductoId,
+                Nombre = productoVM.Nombre,
+                Especificaciones = productoVM.Especificaciones,
+                Precio = productoVM.Precio,
+                Disponible = productoVM.Disponible,
+                Destacado = productoVM.Destacado,
+                ImagenUrl = productoVM.ImagenUrl,
+                MarcaId = productoVM.MarcaId,
+                CategoriaId = productoVM.CategoriaId
+            };
+             _tecnoShopDbContext.Productos.Update(producto);
+             _tecnoShopDbContext.SaveChanges();
+            
+
+        }
+
+        //public void EditarProducto(Producto producto)
+        //{
+        //    _tecnoShopDbContext.Productos.Remove(producto);
+        //    _tecnoShopDbContext.SaveChanges();
+        //}
+
+        
+
+        
     }
 }

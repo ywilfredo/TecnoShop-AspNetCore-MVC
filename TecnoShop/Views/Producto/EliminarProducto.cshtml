@@ -1,0 +1,85 @@
+﻿@model TecnoShop.ViewModels.ProductoViewModel
+
+@{
+    ViewData["Title"] = "EliminarProducto";
+}
+
+<section class="container seccion">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="row">
+                <h3>¿Estas seguro de que quieres eliminar este producto?</h3>
+            </div>
+            <div class="row">
+                <img src="@Model.ImagenUrl" alt="">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Nombre</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-primary">
+                    <span class="monospaced">Especificaciones:</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="description">
+                        @Model.Especificaciones
+                    </p>
+
+                </div>
+            </div>
+
+            <hr />
+
+
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.Precio $us</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Disponible: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.EstaDisponible</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Destacado: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.EsDestacado</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Categoría: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.NombreCategoria</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 col-form-label">Marca: </label>
+                <div class="col-sm-9">
+                    <label class="col-form-label texto-detalle">@Model.NombreMarca</label>
+                </div>
+            </div>
+
+            <hr />
+            <form asp-action="EliminarProducto" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="ProductoId" />
+                <input type="hidden" asp-for="ImagenUrl" />
+                <input type="hidden" asp-for="ProductoId" />
+                <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                <a asp-action="Index" class="btn btn-secondary">Volver atrás</a>
+            </form>
+
+        </div>
+    </div>
+
+
+</section>

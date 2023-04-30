@@ -115,14 +115,20 @@ namespace TecnoShop.Models
 
         }
 
+        public void EliminarProducto(Producto producto)
+        {
+            _tecnoShopDbContext.Productos.Remove(producto);
+            _tecnoShopDbContext.SaveChanges();
+        }
+
         //public void EditarProducto(Producto producto)
         //{
         //    _tecnoShopDbContext.Productos.Remove(producto);
         //    _tecnoShopDbContext.SaveChanges();
         //}
 
-        
 
-        
+
+
     }
 }

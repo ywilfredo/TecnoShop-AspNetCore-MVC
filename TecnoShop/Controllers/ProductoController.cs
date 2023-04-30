@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 using TecnoShop.Models;
 using TecnoShop.ViewModels;
 using static NuGet.Packaging.PackagingConstants;
@@ -49,15 +51,15 @@ namespace TecnoShop.Controllers
             return View(producto);
         }
 
-        public IActionResult DetalleProducto(int id)  
+        public IActionResult DetalleProducto(int id)
         {
             var productoVM = _productoRepositorio.ObtenerProducto(id);
             productoVM.CategoriasItems = CargarCategoriasItems();
             productoVM.MarcasItems = CargarMarcasItems();
-            
-            foreach(var cate in _categoriaRepositorio.TodasLasCategorias)
+
+            foreach (var cate in _categoriaRepositorio.TodasLasCategorias)
             {
-               if(productoVM.CategoriaId == cate.CategoriaId)
+                if (productoVM.CategoriaId == cate.CategoriaId)
                 {
                     productoVM.NombreCategoria = cate.Nombre;
                 }
@@ -76,8 +78,55 @@ namespace TecnoShop.Controllers
             if (productoVM.Destacado)
                 productoVM.EsDestacado = "Sí";
             else productoVM.EsDestacado = "No";
-                
+
             return View(productoVM);
+        }
+
+        public IActionResult EliminarProducto(int id)
+        {
+            var productoVM = _productoRepositorio.ObtenerProducto(id);
+            productoVM.CategoriasItems = CargarCategoriasItems();
+            productoVM.MarcasItems = CargarMarcasItems();
+
+            foreach (var cate in _categoriaRepositorio.TodasLasCategorias)
+            {
+                if (productoVM.CategoriaId == cate.CategoriaId)
+                {
+                    productoVM.NombreCategoria = cate.Nombre;
+                }
+            }
+            foreach (var marca in _marcaRepositorio.TodasLasMarcas)
+            {
+                if (productoVM.MarcaId == marca.MarcaId)
+                {
+                    productoVM.NombreMarca = marca.Nombre;
+                }
+            }
+            if (productoVM.Disponible)
+                productoVM.EstaDisponible = "Sí";
+            else productoVM.EstaDisponible = "No";
+
+            if (productoVM.Destacado)
+                productoVM.EsDestacado = "Sí";
+            else productoVM.EsDestacado = "No";
+
+            return View(productoVM);
+        }
+        [HttpPost]
+        public IActionResult EliminarProducto(ProductoViewModel productoViewModel)
+        {
+            //eliminar la imagen que tiene y luego reemplazarla por una nueva imagen
+            char[] carpeta = { '/', 'i', 'm', 'a', 'g', 'e', 's', '/' };
+            productoViewModel.nombreImagen = productoViewModel.ImagenUrl.TrimStart(carpeta);
+
+            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", productoViewModel.nombreImagen);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+
+            Producto? producto = _productoRepositorio.ObtenerProductoPorId(productoViewModel.ProductoId);
+            _productoRepositorio.EliminarProducto(producto);
+            TempData["mensaje"] = "El producto se eliminó correctamente";
+            return RedirectToAction("Index");
         }
 
 
@@ -85,60 +134,48 @@ namespace TecnoShop.Controllers
         {
             ProductoViewModel productCreateViewModel = new ProductoViewModel();
 
-            
+
             productCreateViewModel.CategoriasItems = CargarCategoriasItems();
             productCreateViewModel.MarcasItems = CargarMarcasItems();
 
             return View(productCreateViewModel);
         }
         [HttpPost]
-        public  async Task<IActionResult> CrearProducto(ProductoViewModel productoViewModel)
+        public async Task<IActionResult> CrearProducto(ProductoViewModel productoViewModel)
         {
 
-           
+
             if (ModelState.IsValid)
             {
                 if (productoViewModel.ArchivoImagen != null)
                 {
-                    //productViewModel.ImagenUrl = GuardarImagen(productViewModel);
+                    
+                    //Guardar imagen en ~/images/nombre_image.jpg
                     string folder = "images/";
                     folder += Guid.NewGuid().ToString() + "_" + productoViewModel.ArchivoImagen.FileName;
-                    productoViewModel.ImagenUrl = "/" + folder;
                     string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                    await productoViewModel.ArchivoImagen.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    using( var fileStream = new FileStream(serverFolder, FileMode.Create))
+                    {
+                        await productoViewModel.ArchivoImagen.CopyToAsync(fileStream);
+                    }
                     
+                    
+                    //asignar la direccion url al viewmodel
+                    productoViewModel.ImagenUrl = "/" + folder;
+
                 }
 
                 int id = await _productoRepositorio.CrearProducto(productoViewModel);
-                if(id > 0)
+                if (id > 0)
                 {
                     TempData["mensaje"] = "El producto se creó correctamente";
                     return RedirectToAction("Index");
                 }
-                
+
             }
             return View(productoViewModel);
 
         }
-
-
-        private string GuardarImagen(ProductoViewModel productViewModel)
-        {
-            string fileName = null;
-            if (productViewModel.ArchivoImagen != null)
-            {
-                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath,"images");
-                fileName = Guid.NewGuid().ToString() + "-" + productViewModel.ArchivoImagen.FileName;
-                string filePath = Path.Combine(serverFolder, fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    productViewModel.ArchivoImagen.CopyTo(fileStream);
-                }
-            }
-            return fileName;
-        }
-
-
 
         public IActionResult EditarProducto(int id)
         {
@@ -150,32 +187,48 @@ namespace TecnoShop.Controllers
 
         }
 
-        //[HttpPost]
-        //public IActionResult EditarProductoAntes(ProductCreateViewModel productViewModel)
-        //{
-        //    var producto = new Producto();
-        //    if (ModelState.IsValid)
-        //    {
-        //        string nombreArchivo = SubirArchivo(productViewModel);
+        [HttpPost]
+        public IActionResult EditarProducto(ProductoViewModel productoViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (productoViewModel.ArchivoImagen != null) // si no es nulo el campo del archivo
+                {
+                    if (productoViewModel.ImagenUrl != null)
+                    {
+                        //eliminar la imagen que tiene y luego reemplazarla por una nueva imagen
+                        char[] carpeta = { '/', 'i', 'm', 'a', 'g', 'e', 's','/'};
+                        productoViewModel.nombreImagen = productoViewModel.ImagenUrl.TrimStart(carpeta);
 
-        //        producto.Nombre = productViewModel.Nombre;
-        //        producto.Especificaciones = productViewModel.Especificaciones;
-        //        producto.Precio = Convert.ToDecimal(productViewModel.Precio);
-        //        producto.Disponible = productViewModel.Disponible;
-        //        producto.Destacado = productViewModel.Destacado;
-        //        producto.ImagenUrl = nombreArchivo;
-        //        producto.MarcaId = productViewModel.MarcaId;
-        //        producto.CategoriaId = productViewModel.CategoriaId;
+                        var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", productoViewModel.nombreImagen);
+                        if (System.IO.File.Exists(imagePath))
+                            System.IO.File.Delete(imagePath);
+                    }
 
-        //        //GuardarProducto
-        //        _productoRepositorio.EditarProducto(producto);
-        //        TempData["mensaje"] = "El producto se actualizó correctamente";
-        //        return RedirectToAction(nameof(Index));
-        //    }
+                    //Guardar imagen en ~/images/nombre_image.jpg
+                    string folder = "images/";
+                    folder += Guid.NewGuid().ToString() + "_" + productoViewModel.ArchivoImagen.FileName;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
 
-        //    return View(producto);
-        //}
+                    //productoViewModel.ArchivoImagen.CopyTo(new FileStream(serverFolder, FileMode.Create));
+                    using (var fileStream = new FileStream(serverFolder, FileMode.Create))
+                    {
+                        productoViewModel.ArchivoImagen.CopyToAsync(fileStream);
+                    }
 
+                    //asignar la direccion url al viewmodel
+                    productoViewModel.ImagenUrl = "/" + folder;
+
+                }
+
+                //Guardar cambios
+                _productoRepositorio.EditarProducto(productoViewModel);
+                TempData["mensaje"] = "El producto se actualizó correctamente";
+                return RedirectToAction(nameof(Index));
+            }
+               
+            return View(productoViewModel);
+        }
 
 
         //Obtener MarcasItems
@@ -205,18 +258,8 @@ namespace TecnoShop.Controllers
                      }).ToList();
             return categorias;
         }
+
+        
     }
 }
 
-
-//Guardar imagen en el wwwroot/images
-
-//string wwwrootPath = _webHostEnvironment.WebRootPath;
-//string fileName = Path.GetFileNameWithoutExtension(productViewModel.ImageFile.FileName);
-//string extension = Path.GetExtension(productViewModel.ImageFile.FileName);
-//productViewModel.Producto.ImagenUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-//string path = Path.Combine(wwwrootPath + "/images/", fileName);
-//using (var fileStream = new FileStream(path,FileMode.Create))
-//{
-//    productViewModel.ImageFile.CopyTo(fileStream);
-//}

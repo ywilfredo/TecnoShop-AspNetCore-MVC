@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using TecnoShop.Models;
+using System.IO;
 
 namespace TecnoShop.ViewModels
 {
@@ -26,6 +27,7 @@ namespace TecnoShop.ViewModels
         public string NombreCategoria { get; set; } = string.Empty;
         public string EstaDisponible { get; set;} = string.Empty;
         public string EsDestacado { get; set; } = string.Empty;
+        public string nombreImagen { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Por favor seleccione una categoaría")]
         public int CategoriaId { get; set; }

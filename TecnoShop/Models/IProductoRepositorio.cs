@@ -14,5 +14,6 @@ namespace TecnoShop.Models
         public Task<int> CrearProducto(ProductoViewModel productovm);
         //public Task<int> EditarProducto(ProductCreateViewModel productovm);
         void EditarProducto(ProductoViewModel productovm);
+        void EliminarProducto(Producto producto);
     }
 }

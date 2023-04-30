@@ -182,6 +182,7 @@ namespace TecnoShop.Controllers
             var productoVM = _productoRepositorio.ObtenerProducto(id);
             productoVM.CategoriasItems = CargarCategoriasItems();
             productoVM.MarcasItems = CargarMarcasItems();
+            productoVM.PrecioP = Convert.ToInt32(productoVM.Precio);
 
             return View(productoVM);
 

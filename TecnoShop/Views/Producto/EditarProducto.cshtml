@@ -40,8 +40,8 @@
                     <span asp-validation-for="ArchivoImagen" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Precio"  class="control-label"></label>
-                    <input asp-for="Precio" class="form-control" />
+                    <label  class="control-label">Precio en $us</label>
+                    <input asp-for="Precio" class="form-control" type="number" name="precio" value="@Model.PrecioP">
                     <span asp-validation-for="Precio" class="text-danger"></span>
                 </div>
 

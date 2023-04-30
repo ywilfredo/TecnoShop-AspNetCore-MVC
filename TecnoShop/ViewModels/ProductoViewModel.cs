@@ -16,6 +16,7 @@ namespace TecnoShop.ViewModels
 
         [Required(ErrorMessage = "Por favor ingrese el precio del producto")]
         public decimal Precio { get; set; }
+        public int PrecioP { get; set; }
         public bool Disponible { get; set; }
         public bool Destacado { get; set; }
         public string? ImagenUrl { get; set; }

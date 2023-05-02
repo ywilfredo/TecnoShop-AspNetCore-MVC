@@ -13,20 +13,17 @@ namespace TecnoShop.Models
             _tecnoShopDbContext = tecnoShopDbContext;
         }
 
-
         public IEnumerable<Producto> TodosLosProductos
         {
-
             get
             {
                 //retorne todas los productos incluyendo la categoria y marca -- aumente el ToList() al final
                 return _tecnoShopDbContext.Productos
-                    .Include(x => x.Categoria)
-                    .Include(x => x.Marca).ToList();
+                    .Include(p => p.Categoria)
+                    .Include(p => p.Marca)
+                    .OrderByDescending(p => p.ProductoId).ToList();
             }
         }
-
-
 
         public IEnumerable<Producto> ProductoDestacado
         {
@@ -53,11 +50,6 @@ namespace TecnoShop.Models
             throw new NotImplementedException();
         }
 
-        //public void CrearProducto(Producto producto)
-        //{
-        //    _tecnoShopDbContext.Productos.Add(producto);
-        //    _tecnoShopDbContext.SaveChanges();
-        //}
         public async Task<int> CrearProducto(ProductoViewModel productoVM)
         {
             var producto = new Producto()
@@ -93,7 +85,7 @@ namespace TecnoShop.Models
                     MarcaId = productVm.MarcaId
                 }).FirstOrDefault();
         }
-
+        
 
         public void EditarProducto(ProductoViewModel productoVM)
         {
@@ -120,15 +112,6 @@ namespace TecnoShop.Models
             _tecnoShopDbContext.Productos.Remove(producto);
             _tecnoShopDbContext.SaveChanges();
         }
-
-        //public void EditarProducto(Producto producto)
-        //{
-        //    _tecnoShopDbContext.Productos.Remove(producto);
-        //    _tecnoShopDbContext.SaveChanges();
-        //}
-
-
-
 
     }
 }

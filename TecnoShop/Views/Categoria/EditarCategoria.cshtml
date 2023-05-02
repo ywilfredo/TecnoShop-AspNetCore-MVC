@@ -21,15 +21,13 @@
                     <input asp-for="Descripcion" class="form-control" />
                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-5">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-action="Index"> Atrás</a>
                 </div>
             </form>
 
         </div>
-    </div>
-    <div>
-        <a asp-action="Index">Volver atrás</a>
     </div>
 
 </section>

@@ -16,9 +16,11 @@
         </div>
     }
 
-    <p>
-        <a asp-action="CrearMarca"> Crear Marca</a>
-    </p>
+    <div class="row text-end">
+        <p>
+            <a asp-action="CrearMarca" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Crear nueva marca</a>
+        </p>
+    </div>
     @*<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#myModal" data-url="@Url.Action("CrearCategoria")"> Crear Categoria</button>
     *@
     <table class="table">
@@ -44,9 +46,9 @@
                         @Html.DisplayFor(modelItem => item.Descripcion)
                     </td>
                     <td>
-                        <a asp-action="EditarMarca" asp-route-id="@item.MarcaId"> Editar </a> |
-                        <a asp-action="DetalleMarca" asp-route-id="@item.MarcaId"> Detalle </a> |
-                        <a asp-action="EliminarMarca" asp-route-id="@item.MarcaId"> Eliminar </a>
+                        <a asp-action="EditarMarca" asp-route-id="@item.MarcaId" class="iconos"> <i class="bi bi-pencil"></i> </a> 
+                        <a asp-action="DetalleMarca" asp-route-id="@item.MarcaId" class="iconos"> <i class="bi bi-eye"></i> </a> 
+                        <a asp-action="EliminarMarca" asp-route-id="@item.MarcaId" class="iconos"> <i class="bi bi-trash3"></i> </a>
                     </td>
                 </tr>
             }

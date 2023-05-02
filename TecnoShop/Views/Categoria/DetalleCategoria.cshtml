@@ -26,7 +26,9 @@
         </dl>
     </div>
     <div>
-        <a asp-action="EditarCategoria" asp-route-id="@Model?.CategoriaId">Editar</a> |
-        <a asp-action="Index">Volver atrás</a>
+        <div class="form-group mt-5">
+            <a asp-action="EditarCategoria" asp-route-id="@Model?.CategoriaId" class="btn btn-primary">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary"> Atrás</a>
+        </div>
     </div>
 </section>

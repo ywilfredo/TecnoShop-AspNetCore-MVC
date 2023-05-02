@@ -7,11 +7,11 @@
     
     <hr />
     <div class="row">
-        <div class="col-md-6">
-            <div class="row">
+        <div class="col-md-6 mb-5">
+            <div class="row mb-3 text-center">
                 <h4>Editar Producto</h4>
             </div>
-            <div class="row">
+            <div class="row mb-4">
                 <img src="@Model.ImagenUrl" />
             </div>
         </div>
@@ -34,8 +34,7 @@
                     <textarea asp-for="Especificaciones" class="form-control" placeholder="escriba las especificaciones aquí.." id="floatingTextarea" style="height: 100px;"></textarea>
                     <span asp-validation-for="Especificaciones" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ArchivoImagen" class="control-label"></label>
+                <div class="form-group mt-3">
                     <input asp-for="ArchivoImagen" accept="image/*" multiple>
                     <span asp-validation-for="ArchivoImagen" class="text-danger"></span>
                 </div>

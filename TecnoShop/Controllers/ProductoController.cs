@@ -25,15 +25,8 @@ namespace TecnoShop.Controllers
 
         public IActionResult Index()
         {
-            //IEnumerable<Producto> productos = _productoRepositorio.TodosLosProductos.ToList();
-            //return View(productos);
-
             ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
             return View(listaProductoViewModel);
-
-            //ProductoViewModel ProductoViewModel = new ProductoViewModel(_productoRepositorio.TodosLosProductos, _categoriaRepositorio.TodasLasCategorias, _marcaRepositorio.TodasLasMarcas);
-            //return View(ProductoViewModel);
-
         }
 
         public IActionResult ListaProducto()
@@ -82,52 +75,7 @@ namespace TecnoShop.Controllers
             return View(productoVM);
         }
 
-        public IActionResult EliminarProducto(int id)
-        {
-            var productoVM = _productoRepositorio.ObtenerProducto(id);
-            productoVM.CategoriasItems = CargarCategoriasItems();
-            productoVM.MarcasItems = CargarMarcasItems();
-
-            foreach (var cate in _categoriaRepositorio.TodasLasCategorias)
-            {
-                if (productoVM.CategoriaId == cate.CategoriaId)
-                {
-                    productoVM.NombreCategoria = cate.Nombre;
-                }
-            }
-            foreach (var marca in _marcaRepositorio.TodasLasMarcas)
-            {
-                if (productoVM.MarcaId == marca.MarcaId)
-                {
-                    productoVM.NombreMarca = marca.Nombre;
-                }
-            }
-            if (productoVM.Disponible)
-                productoVM.EstaDisponible = "Sí";
-            else productoVM.EstaDisponible = "No";
-
-            if (productoVM.Destacado)
-                productoVM.EsDestacado = "Sí";
-            else productoVM.EsDestacado = "No";
-
-            return View(productoVM);
-        }
-        [HttpPost]
-        public IActionResult EliminarProducto(ProductoViewModel productoViewModel)
-        {
-            //eliminar la imagen que tiene y luego reemplazarla por una nueva imagen
-            char[] carpeta = { '/', 'i', 'm', 'a', 'g', 'e', 's', '/' };
-            productoViewModel.nombreImagen = productoViewModel.ImagenUrl.TrimStart(carpeta);
-
-            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", productoViewModel.nombreImagen);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
-
-            Producto? producto = _productoRepositorio.ObtenerProductoPorId(productoViewModel.ProductoId);
-            _productoRepositorio.EliminarProducto(producto);
-            TempData["mensaje"] = "El producto se eliminó correctamente";
-            return RedirectToAction("Index");
-        }
+        
 
 
         public IActionResult CrearProducto()
@@ -193,11 +141,11 @@ namespace TecnoShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (productoViewModel.ArchivoImagen != null) // si no es nulo el campo del archivo
+                if (productoViewModel.ArchivoImagen != null) 
                 {
                     if (productoViewModel.ImagenUrl != null)
                     {
-                        //eliminar la imagen que tiene y luego reemplazarla por una nueva imagen
+                        //obtener solo el nombre de la imagen
                         char[] carpeta = { '/', 'i', 'm', 'a', 'g', 'e', 's','/'};
                         productoViewModel.nombreImagen = productoViewModel.ImagenUrl.TrimStart(carpeta);
 
@@ -229,6 +177,53 @@ namespace TecnoShop.Controllers
             }
                
             return View(productoViewModel);
+        }
+
+        public IActionResult EliminarProducto(int id)
+        {
+            var productoVM = _productoRepositorio.ObtenerProducto(id);
+            productoVM.CategoriasItems = CargarCategoriasItems();
+            productoVM.MarcasItems = CargarMarcasItems();
+
+            foreach (var cate in _categoriaRepositorio.TodasLasCategorias)
+            {
+                if (productoVM.CategoriaId == cate.CategoriaId)
+                {
+                    productoVM.NombreCategoria = cate.Nombre;
+                }
+            }
+            foreach (var marca in _marcaRepositorio.TodasLasMarcas)
+            {
+                if (productoVM.MarcaId == marca.MarcaId)
+                {
+                    productoVM.NombreMarca = marca.Nombre;
+                }
+            }
+            if (productoVM.Disponible)
+                productoVM.EstaDisponible = "Sí";
+            else productoVM.EstaDisponible = "No";
+
+            if (productoVM.Destacado)
+                productoVM.EsDestacado = "Sí";
+            else productoVM.EsDestacado = "No";
+
+            return View(productoVM);
+        }
+        [HttpPost]
+        public IActionResult EliminarProducto(ProductoViewModel productoViewModel)
+        {
+            //eliminar la imagen que tiene y luego reemplazarla por una nueva imagen
+            char[] carpeta = { '/', 'i', 'm', 'a', 'g', 'e', 's', '/' };
+            productoViewModel.nombreImagen = productoViewModel.ImagenUrl.TrimStart(carpeta);
+
+            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", productoViewModel.nombreImagen);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+
+            Producto? producto = _productoRepositorio.ObtenerProductoPorId(productoViewModel.ProductoId);
+            _productoRepositorio.EliminarProducto(producto);
+            TempData["mensaje"] = "El producto se eliminó correctamente";
+            return RedirectToAction("Index");
         }
 
 

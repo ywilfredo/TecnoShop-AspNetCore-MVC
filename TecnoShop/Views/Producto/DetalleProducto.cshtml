@@ -7,11 +7,11 @@
 <section class="container seccion">
     <div class="row">
         
-        <div class="col-md-6">
-            <div class="row">
+        <div class="col-md-6  mb-5">
+            <div class="row mb-3 text-center">
                 <h3>Detalle del Producto</h3>
             </div>
-            <div class="row">
+            <div class="row mb-4">
                 <img src="@Model.ImagenUrl" alt="">
             </div>
         </div>
@@ -68,21 +68,6 @@
                     <label class="col-form-label texto-detalle">@Model.NombreMarca</label>
                 </div>
             </div>
-
-           
-            @*<div class="row">
-                <label class="col-sm-3 col-form-label">Categoría: </label>
-                <div class="col-sm-9">
-                    <select asp-for="@Model.CategoriaId" class="form-select" asp-items="@Model.CategoriasItems" disabled></select>
-                </div>
-            </div>
-            <div class="row">
-                <label class="col-sm-3 col-form-label">Marca: </label>
-                <div class="col-sm-9">
-                    <select asp-for="@Model.MarcaId" class="form-select" asp-items="@Model.MarcasItems" disabled></select>
-                </div>
-            </div>*@
-           
             <hr/>
             <div>
                 <a asp-action="EditarProducto" asp-route-id="@Model?.ProductoId" class="btn btn-primary">Editar</a> |

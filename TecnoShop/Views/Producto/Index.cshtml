@@ -17,67 +17,49 @@
             </button>
         </div>
     }
-
-    <p>
-        <a asp-action="CrearProducto"> Crear Producto</a>
-    </p>
+    <div class="row">
+        <p>
+            <a asp-action="CrearProducto" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Crear nuevo producto</a>
+        </p>
+    </div>
+    
     @*<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#myModal" data-url="@Url.Action("CrearCategoria")"> Crear Categoria</button>
     *@
-    <table class="table tabla-productos">
-        <thead>
-            <tr>
-                <th>
-                    Imagen
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Especificaciones
-                </th>
-                <th>
-                    Marca
-                </th>
-                <th>
-                    Categoria
-                </th>
-                <th>
-                    Precio
-                </th>
-            </tr>
+    <div class="row px-3">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table tabla-productos">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Especificaciones</th>
+                        <th> Marca</th>
+                        <th>Categoria</th>
+                        <th> Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Productos)
+                    {
+                        <tr>
+                            <td><img src="@item.ImagenUrl" alt="" style="max-width:50px;" /></td>
+                            <td> @Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td class="ellipsis">@item.Especificaciones</td>
+                            <td> @Html.DisplayFor(modelItem => item.Marca.Nombre)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Categoria.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Precio) </td>
+                            <td>
+                                <a asp-action="EditarProducto" asp-route-id="@item.ProductoId" class="iconos"> <i class="bi bi-pencil"></i></a>
+                                <a asp-action="DetalleProducto" asp-route-id="@item.ProductoId" class="iconos"> <i class="bi bi-eye"></i> </a>
+                                <a asp-action="EliminarProducto" asp-route-id="@item.ProductoId" class="iconos"> <i class="bi bi-trash3"></i> </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
 
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Productos)
-            {
-                <tr>
-                    <td>
-                        <img src="@item.ImagenUrl" alt="" style="max-width:50px;" />
-                        @*<img src="@("~/images/"+item.ImagenUrl)" asp-append-version="true" alt="" style="max-width:50px;" />*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td class="ellipsis">
-                        @item.Especificaciones
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Marca.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Categoria.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Precio)
-                    </td>
-                    <td>
-                        <a asp-action="EditarProducto" asp-route-id="@item.ProductoId"> Editar </a> |
-                        <a asp-action="DetalleProducto" asp-route-id="@item.ProductoId"> Detalle </a> |
-                        <a asp-action="EliminarProducto" asp-route-id="@item.ProductoId"> Eliminar </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
+            </table>
 
-    </table>
+        </div>
+    </div>
+    
 </section>

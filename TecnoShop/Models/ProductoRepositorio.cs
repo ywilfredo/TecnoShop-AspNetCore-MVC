@@ -25,12 +25,12 @@ namespace TecnoShop.Models
             }
         }
 
-        public IEnumerable<Producto> ProductoDestacado
+        public IEnumerable<Producto> ProductosDestacados
         {
             get
             {
                 //Retorna todas los productos incluyendo la categoria, donde el atributo Destacado sea igual a true
-                return _tecnoShopDbContext.Productos.Include(x => x.Categoria).Where(p => p.Destacado);
+                return _tecnoShopDbContext.Productos.Include(x => x.Categoria).Where(p => p.Destacado).ToList();
 
             }
 
@@ -40,14 +40,6 @@ namespace TecnoShop.Models
         {
             //Retorna un producto donde el atributo ProductoId sea igual al parametro
             return _tecnoShopDbContext.Productos.FirstOrDefault(p => p.ProductoId == productoId);
-        }
-
-        
-
-
-        public IEnumerable<Producto> BuscarProductos(string searchQuery)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<int> CrearProducto(ProductoViewModel productoVM)
@@ -72,20 +64,21 @@ namespace TecnoShop.Models
         public ProductoViewModel? ObtenerProducto(int id)
         {
             return _tecnoShopDbContext.Productos.Where(p => p.ProductoId == id)
-                .Select(productVm => new ProductoViewModel()
+                .Select(producto => new ProductoViewModel()
                 {
-                    ProductoId = productVm.ProductoId,
-                    Nombre = productVm.Nombre,
-                    Especificaciones = productVm.Especificaciones,
-                    Precio = productVm.Precio,
-                    Disponible = productVm.Disponible,
-                    Destacado = productVm.Destacado,
-                    ImagenUrl = productVm.ImagenUrl,
-                    CategoriaId = productVm.CategoriaId,
-                    MarcaId = productVm.MarcaId
+                    ProductoId = producto.ProductoId,
+                    Nombre = producto.Nombre,
+                    Especificaciones = producto.Especificaciones,
+                    Precio = producto.Precio,
+                    Disponible = producto.Disponible,
+                    Destacado = producto.Destacado,
+                    ImagenUrl = producto.ImagenUrl,
+                    CategoriaId = producto.CategoriaId,
+                    MarcaId = producto.MarcaId
                 }).FirstOrDefault();
         }
-        
+
+
 
         public void EditarProducto(ProductoViewModel productoVM)
         {

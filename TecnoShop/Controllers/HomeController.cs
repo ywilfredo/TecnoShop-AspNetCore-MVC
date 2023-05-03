@@ -20,7 +20,7 @@ namespace TecnoShop.Controllers
 
         public IActionResult Index()
         {
-            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
+            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos);
             return View(listaProductoViewModel);
         }
 

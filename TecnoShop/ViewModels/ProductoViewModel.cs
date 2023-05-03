@@ -7,7 +7,6 @@ namespace TecnoShop.ViewModels
 {
     public class ProductoViewModel
     {
-        //public Producto Producto { get; set; } = new Producto();
         public int ProductoId { get; set; }
 
         [Required(ErrorMessage = "Por favor ingrese el nombre del producto")]

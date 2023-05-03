@@ -23,16 +23,29 @@ namespace TecnoShop.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        //Index con paginacion
+        public IActionResult Index(int pg = 1)
         {
-            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
-            return View(listaProductoViewModel);
+            
+            List<Producto> products = _productoRepositorio.TodosLosProductos.ToList();
+            const int pageSize = 10;
+            if (pg < 1)
+                pg = 1;
+            int recsCount = products.Count;
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = products.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+            //return View(products);
+            return View(data);
         }
+
+
 
         public IActionResult ListaProducto()
         {
 
-            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos, "Gaming");
+            ListaProductoViewModel listaProductoViewModel = new ListaProductoViewModel(_productoRepositorio.TodosLosProductos);
             return View(listaProductoViewModel);
         }
 
